@@ -24,15 +24,6 @@ interface ConfigurationInterface extends HttpConfigurations
     public function getEnvironment(): string;
 
     /**
-     * Get this variable specifies the type of environment. Environments:
-     *
-     * * * `api` - Production
-     *
-     * * * `api-test` - UAT
-     */
-    public function getEnv(): string;
-
-    /**
      * Get the credentials to use with ClientCredentialsAuth
      */
     public function getClientCredentialsAuth(): ClientCredentialsAuth;

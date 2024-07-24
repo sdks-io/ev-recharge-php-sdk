@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace ShellEVLib;
 
 use Core\ClientBuilder;
-use Core\Request\Parameters\TemplateParam;
 use Core\Utils\CoreHelper;
 use ShellEVLib\Authentication\ClientCredentialsAuthCredentialsBuilder;
 use ShellEVLib\Authentication\ClientCredentialsAuthManager;
@@ -24,9 +23,9 @@ use Unirest\HttpClient;
 
 class ShellEVClient implements ConfigurationInterface
 {
-    private $charging;
-
     private $locations;
+
+    private $charging;
 
     private $oAuthAuthorization;
 
@@ -45,17 +44,12 @@ class ShellEVClient implements ConfigurationInterface
     public function __construct(array $config = [])
     {
         $this->config = array_merge(ConfigurationDefaults::_ALL, CoreHelper::clone($config));
-        $this->clientCredentialsAuthManager = new ClientCredentialsAuthManager(
-            $this->config['oAuthClientId'] ?? ConfigurationDefaults::O_AUTH_CLIENT_ID,
-            $this->config['oAuthClientSecret'] ?? ConfigurationDefaults::O_AUTH_CLIENT_SECRET,
-            $this->config['oAuthToken']
-        );
+        $this->clientCredentialsAuthManager = new ClientCredentialsAuthManager($this->config);
         $this->client = ClientBuilder::init(new HttpClient(Configuration::init($this)))
             ->converter(new CompatibilityConverter())
             ->jsonHelper(ApiHelper::getJsonHelper())
             ->apiCallback($this->config['httpCallback'] ?? null)
             ->userAgent('APIMATIC 3.0')
-            ->globalConfig($this->getGlobalConfiguration())
             ->serverUrls(self::ENVIRONMENT_MAP[$this->getEnvironment()], Server::DEFAULT_)
             ->authManagers(['BearerAuth' => $this->clientCredentialsAuthManager])
             ->build();
@@ -80,7 +74,6 @@ class ShellEVClient implements ConfigurationInterface
             ->httpStatusCodesToRetry($this->getHttpStatusCodesToRetry())
             ->httpMethodsToRetry($this->getHttpMethodsToRetry())
             ->environment($this->getEnvironment())
-            ->env($this->getEnv())
             ->httpCallback($this->config['httpCallback'] ?? null);
 
         $clientCredentialsAuth = $this->getClientCredentialsAuthCredentialsBuilder();
@@ -140,11 +133,6 @@ class ShellEVClient implements ConfigurationInterface
         return $this->config['environment'] ?? ConfigurationDefaults::ENVIRONMENT;
     }
 
-    public function getEnv(): string
-    {
-        return $this->config['env'] ?? ConfigurationDefaults::ENV;
-    }
-
     public function getClientCredentialsAuth(): ClientCredentialsAuth
     {
         return $this->clientCredentialsAuthManager;
@@ -197,17 +185,6 @@ class ShellEVClient implements ConfigurationInterface
     }
 
     /**
-     * Returns Charging Controller
-     */
-    public function getChargingController(): ChargingController
-    {
-        if ($this->charging == null) {
-            $this->charging = new ChargingController($this->client);
-        }
-        return $this->charging;
-    }
-
-    /**
      * Returns Locations Controller
      */
     public function getLocationsController(): LocationsController
@@ -216,6 +193,17 @@ class ShellEVClient implements ConfigurationInterface
             $this->locations = new LocationsController($this->client);
         }
         return $this->locations;
+    }
+
+    /**
+     * Returns Charging Controller
+     */
+    public function getChargingController(): ChargingController
+    {
+        if ($this->charging == null) {
+            $this->charging = new ChargingController($this->client);
+        }
+        return $this->charging;
     }
 
     /**
@@ -230,17 +218,12 @@ class ShellEVClient implements ConfigurationInterface
     }
 
     /**
-     * Get the defined global configurations
-     */
-    private function getGlobalConfiguration(): array
-    {
-        return [TemplateParam::init('env', $this->getEnv())->dontEncode()];
-    }
-
-    /**
      * A map of all base urls used in different environments and servers
      *
      * @var array
      */
-    private const ENVIRONMENT_MAP = [Environment::PRODUCTION => [Server::DEFAULT_ => 'https://{env}']];
+    private const ENVIRONMENT_MAP = [
+        Environment::PRODUCTION => [Server::DEFAULT_ => 'https://api.shell.com'],
+        Environment::ENVIRONMENT2 => [Server::DEFAULT_ => 'https://api-test.shell.com']
+    ];
 }

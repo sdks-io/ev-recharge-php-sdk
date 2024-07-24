@@ -36,6 +36,11 @@ class DataRetrieve implements \JsonSerializable
     private $evseId;
 
     /**
+     * @var string|null
+     */
+    private $lastUpdated;
+
+    /**
      * @var \DateTime|null
      */
     private $startedAt;
@@ -46,19 +51,9 @@ class DataRetrieve implements \JsonSerializable
     private $stoppedAt = [];
 
     /**
-     * @var string|null
+     * @var ChargeRetrieveState|null
      */
     private $sessionState;
-
-    /**
-     * @var array
-     */
-    private $sessionCode = [];
-
-    /**
-     * @var array
-     */
-    private $sessionMessage = [];
 
     /**
      * Returns Id.
@@ -73,7 +68,7 @@ class DataRetrieve implements \JsonSerializable
      * Sets Id.
      * Id of the session
      *
-     * @maps Id
+     * @maps id
      */
     public function setId(?string $id): void
     {
@@ -93,7 +88,7 @@ class DataRetrieve implements \JsonSerializable
      * Sets User Id.
      * Id of the user that started the session
      *
-     * @maps UserId
+     * @maps userId
      */
     public function setUserId(?string $userId): void
     {
@@ -113,7 +108,7 @@ class DataRetrieve implements \JsonSerializable
      * Sets Ema Id.
      * Id of the evse that the user is charging
      *
-     * @maps EmaId
+     * @maps emaId
      */
     public function setEmaId(?string $emaId): void
     {
@@ -133,11 +128,31 @@ class DataRetrieve implements \JsonSerializable
      * Sets Evse Id.
      * Ema-id of the charge token that is used
      *
-     * @maps EvseId
+     * @maps evseId
      */
     public function setEvseId(?string $evseId): void
     {
         $this->evseId = $evseId;
+    }
+
+    /**
+     * Returns Last Updated.
+     * Last updated date
+     */
+    public function getLastUpdated(): ?string
+    {
+        return $this->lastUpdated;
+    }
+
+    /**
+     * Sets Last Updated.
+     * Last updated date
+     *
+     * @maps lastUpdated
+     */
+    public function setLastUpdated(?string $lastUpdated): void
+    {
+        $this->lastUpdated = $lastUpdated;
     }
 
     /**
@@ -153,7 +168,7 @@ class DataRetrieve implements \JsonSerializable
      * Sets Started At.
      * When the session is started
      *
-     * @maps StartedAt
+     * @maps startedAt
      * @factory \ShellEVLib\Utils\DateTimeHelper::fromRfc3339DateTime
      */
     public function setStartedAt(?\DateTime $startedAt): void
@@ -177,7 +192,7 @@ class DataRetrieve implements \JsonSerializable
      * Sets Stopped At.
      * When the session is stopped
      *
-     * @maps StoppedAt
+     * @maps stoppedAt
      * @factory \ShellEVLib\Utils\DateTimeHelper::fromRfc3339DateTime
      */
     public function setStoppedAt(?\DateTime $stoppedAt): void
@@ -196,88 +211,20 @@ class DataRetrieve implements \JsonSerializable
 
     /**
      * Returns Session State.
-     * Describes the session state
      */
-    public function getSessionState(): ?string
+    public function getSessionState(): ?ChargeRetrieveState
     {
         return $this->sessionState;
     }
 
     /**
      * Sets Session State.
-     * Describes the session state
      *
-     * @maps SessionState
-     * @factory \ShellEVLib\Models\DataRetrieveSessionStateEnum::checkValue
+     * @maps sessionState
      */
-    public function setSessionState(?string $sessionState): void
+    public function setSessionState(?ChargeRetrieveState $sessionState): void
     {
         $this->sessionState = $sessionState;
-    }
-
-    /**
-     * Returns Session Code.
-     * Session code e.g InternalError
-     */
-    public function getSessionCode(): ?string
-    {
-        if (count($this->sessionCode) == 0) {
-            return null;
-        }
-        return $this->sessionCode['value'];
-    }
-
-    /**
-     * Sets Session Code.
-     * Session code e.g InternalError
-     *
-     * @maps SessionCode
-     * @factory \ShellEVLib\Models\DataRetrieveSessionCodeEnum::checkValue
-     */
-    public function setSessionCode(?string $sessionCode): void
-    {
-        $this->sessionCode['value'] = $sessionCode;
-    }
-
-    /**
-     * Unsets Session Code.
-     * Session code e.g InternalError
-     */
-    public function unsetSessionCode(): void
-    {
-        $this->sessionCode = [];
-    }
-
-    /**
-     * Returns Session Message.
-     * Session message
-     */
-    public function getSessionMessage(): ?string
-    {
-        if (count($this->sessionMessage) == 0) {
-            return null;
-        }
-        return $this->sessionMessage['value'];
-    }
-
-    /**
-     * Sets Session Message.
-     * Session message
-     *
-     * @maps SessionMessage
-     */
-    public function setSessionMessage(?string $sessionMessage): void
-    {
-        $this->sessionMessage['value'] = $sessionMessage;
-    }
-
-    /**
-     * Unsets Session Message.
-     * Session message
-     */
-    public function unsetSessionMessage(): void
-    {
-        $this->sessionMessage = [];
     }
 
     /**
@@ -293,31 +240,28 @@ class DataRetrieve implements \JsonSerializable
     {
         $json = [];
         if (isset($this->id)) {
-            $json['Id']             = $this->id;
+            $json['id']           = $this->id;
         }
         if (isset($this->userId)) {
-            $json['UserId']         = $this->userId;
+            $json['userId']       = $this->userId;
         }
         if (isset($this->emaId)) {
-            $json['EmaId']          = $this->emaId;
+            $json['emaId']        = $this->emaId;
         }
         if (isset($this->evseId)) {
-            $json['EvseId']         = $this->evseId;
+            $json['evseId']       = $this->evseId;
+        }
+        if (isset($this->lastUpdated)) {
+            $json['lastUpdated']  = $this->lastUpdated;
         }
         if (isset($this->startedAt)) {
-            $json['StartedAt']      = DateTimeHelper::toRfc3339DateTime($this->startedAt);
+            $json['startedAt']    = DateTimeHelper::toRfc3339DateTime($this->startedAt);
         }
         if (!empty($this->stoppedAt)) {
-            $json['StoppedAt']      = DateTimeHelper::toRfc3339DateTime($this->stoppedAt['value']);
+            $json['stoppedAt']    = DateTimeHelper::toRfc3339DateTime($this->stoppedAt['value']);
         }
         if (isset($this->sessionState)) {
-            $json['SessionState']   = DataRetrieveSessionStateEnum::checkValue($this->sessionState);
-        }
-        if (!empty($this->sessionCode)) {
-            $json['SessionCode']    = DataRetrieveSessionCodeEnum::checkValue($this->sessionCode['value']);
-        }
-        if (!empty($this->sessionMessage)) {
-            $json['SessionMessage'] = $this->sessionMessage['value'];
+            $json['sessionState'] = $this->sessionState;
         }
 
         return (!$asArrayWhenEmpty && empty($json)) ? new stdClass() : $json;

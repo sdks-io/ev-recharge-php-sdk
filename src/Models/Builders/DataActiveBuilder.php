@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace ShellEVLib\Models\Builders;
 
 use Core\Utils\CoreHelper;
+use ShellEVLib\Models\ChargeRetrieveState;
 use ShellEVLib\Models\DataActive;
 
 /**
@@ -104,45 +105,18 @@ class DataActiveBuilder
     /**
      * Sets session state field.
      */
-    public function sessionState(?string $value): self
+    public function sessionState(?ChargeRetrieveState $value): self
     {
         $this->instance->setSessionState($value);
         return $this;
     }
 
     /**
-     * Sets session code field.
+     * Sets last updated field.
      */
-    public function sessionCode(?string $value): self
+    public function lastUpdated(?string $value): self
     {
-        $this->instance->setSessionCode($value);
-        return $this;
-    }
-
-    /**
-     * Unsets session code field.
-     */
-    public function unsetSessionCode(): self
-    {
-        $this->instance->unsetSessionCode();
-        return $this;
-    }
-
-    /**
-     * Sets session message field.
-     */
-    public function sessionMessage(?string $value): self
-    {
-        $this->instance->setSessionMessage($value);
-        return $this;
-    }
-
-    /**
-     * Unsets session message field.
-     */
-    public function unsetSessionMessage(): self
-    {
-        $this->instance->unsetSessionMessage();
+        $this->instance->setLastUpdated($value);
         return $this;
     }
 

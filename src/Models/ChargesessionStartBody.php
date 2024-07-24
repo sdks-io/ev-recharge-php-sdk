@@ -36,7 +36,7 @@ class ChargesessionStartBody implements \JsonSerializable
 
     /**
      * Returns Ev Charge Number.
-     * The EV Charge Number which can be found on the back of the Shell EV Card
+     * Ev charge number
      */
     public function getEvChargeNumber(): string
     {
@@ -45,10 +45,10 @@ class ChargesessionStartBody implements \JsonSerializable
 
     /**
      * Sets Ev Charge Number.
-     * The EV Charge Number which can be found on the back of the Shell EV Card
+     * Ev charge number
      *
      * @required
-     * @maps EvChargeNumber
+     * @maps evChargeNumber
      */
     public function setEvChargeNumber(string $evChargeNumber): void
     {
@@ -57,7 +57,7 @@ class ChargesessionStartBody implements \JsonSerializable
 
     /**
      * Returns Evse Id.
-     * Standard EVSE (Electric Vehicle Supply Equipment) Id identifier (ISO-IEC-15118)
+     * This is the Electric Vehicle EquipmentID
      */
     public function getEvseId(): string
     {
@@ -66,10 +66,10 @@ class ChargesessionStartBody implements \JsonSerializable
 
     /**
      * Sets Evse Id.
-     * Standard EVSE (Electric Vehicle Supply Equipment) Id identifier (ISO-IEC-15118)
+     * This is the Electric Vehicle EquipmentID
      *
      * @required
-     * @maps EvseId
+     * @maps evseId
      */
     public function setEvseId(string $evseId): void
     {
@@ -88,8 +88,8 @@ class ChargesessionStartBody implements \JsonSerializable
     public function jsonSerialize(bool $asArrayWhenEmpty = false)
     {
         $json = [];
-        $json['EvChargeNumber'] = $this->evChargeNumber;
-        $json['EvseId']         = $this->evseId;
+        $json['evChargeNumber'] = $this->evChargeNumber;
+        $json['evseId']         = $this->evseId;
 
         return (!$asArrayWhenEmpty && empty($json)) ? new stdClass() : $json;
     }

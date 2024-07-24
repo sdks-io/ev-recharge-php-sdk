@@ -5,7 +5,6 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `env` | `string(EnvEnum)` | This variable specifies the type of environment. Environments:<br><br>* `api` - Production<br>* `api-test` - UAT<br>*Default*: `EnvEnum::ENUM_APITESTSHELLCOM` |
 | `environment` | `Environment` | The API environment. <br> **Default: `Environment.PRODUCTION`** |
 | `timeout` | `int` | Timeout for API calls in seconds.<br>*Default*: `0` |
 | `enableRetries` | `bool` | Whether to enable retries and backoff feature.<br>*Default*: `false` |
@@ -29,7 +28,6 @@ $client = ShellEVClientBuilder::init()
         )
     )
     ->environment('production')
-    ->env(EnvEnum::ENUM_APITESTSHELLCOM)
     ->build();
 ```
 
@@ -41,7 +39,7 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 
 | Name | Description |
 |  --- | --- |
-| getChargingController() | Gets ChargingController |
 | getLocationsController() | Gets LocationsController |
+| getChargingController() | Gets ChargingController |
 | getOAuthAuthorizationController() | Gets OAuthAuthorizationController |
 

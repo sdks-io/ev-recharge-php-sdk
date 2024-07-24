@@ -3,14 +3,23 @@
 
 ## Introduction
 
-This API Product provides the option to manage charging at all public Shell Recharge locations. The end points provides control to start, stop and get status of the charging session.
+This API Product provides the list of all Shell Recharge locations. The list includes all Shell Recharge network and all locations available through our roaming partners.
 
-Supported Function
+Supported Functions
 
-* Start a charging session
-* Stop a charging session
-* Retrieve the status of a charging session
-* Retrieve the list of all active sessions for a card   termsOfService: 'https://developer.shell.com/terms-of-use'
+* Get the list of all the locations and its details.
+* Get the details of a particular location.
+* Get the list of locations nearby using the latitude and longitude.
+* Get the list of locations for a given set of bounds with different zoom levels.
+
+The Charging endpoints provides control to start, stop and get status of the charging session.
+
+Supported Functions
+
+* Start a charging session\n
+* Stop a charging session \n
+* Retrieve the status of a charging session \n
+* Retrieve the list of all active sessions for a card
 
 Go to the Shell Developer Portal: [https://developer.shell.com](https://developer.shell.com)
 
@@ -19,19 +28,19 @@ Go to the Shell Developer Portal: [https://developer.shell.com](https://develope
 Run the following command to install the package and automatically add the dependency to your composer.json file:
 
 ```php
-composer require "shell/ev-recharge-sdk:1.0.0"
+composer require "shell/ev-recharge-sdk:1.1.0"
 ```
 
 Or add it to the composer.json file manually as given below:
 
 ```php
 "require": {
-    "shell/ev-recharge-sdk": "1.0.0"
+    "shell/ev-recharge-sdk": "1.1.0"
 }
 ```
 
 You can also view the package at:
-https://packagist.org/packages/shell/ev-recharge-sdk#1.0.0
+https://packagist.org/packages/shell/ev-recharge-sdk#1.1.0
 
 ## Test the SDK
 
@@ -44,13 +53,12 @@ You can change the PHPUnit test configuration in the `phpunit.xml` file.
 
 ## Initialize the API Client
 
-**_Note:_** Documentation for the client can be found [here.](doc/client.md)
+**_Note:_** Documentation for the client can be found [here.](https://www.github.com/sdks-io/ev-recharge-php-sdk/tree/1.1.0/doc/client.md)
 
 The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `env` | `string(EnvEnum)` | This variable specifies the type of environment. Environments:<br><br>* `api` - Production<br>* `api-test` - UAT<br>*Default*: `EnvEnum::ENUM_APITESTSHELLCOM` |
 | `environment` | `Environment` | The API environment. <br> **Default: `Environment.PRODUCTION`** |
 | `timeout` | `int` | Timeout for API calls in seconds.<br>*Default*: `0` |
 | `enableRetries` | `bool` | Whether to enable retries and backoff feature.<br>*Default*: `false` |
@@ -61,7 +69,7 @@ The following parameters are configurable for the API Client:
 | `retryOnTimeout` | `bool` | Whether to retry on request timeout.<br>*Default*: `true` |
 | `httpStatusCodesToRetry` | `array` | Http status codes to retry against.<br>*Default*: `408, 413, 429, 500, 502, 503, 504, 521, 522, 524` |
 | `httpMethodsToRetry` | `array` | Http methods to retry against.<br>*Default*: `'GET', 'PUT'` |
-| `clientCredentialsAuth` | [`ClientCredentialsAuth`](__base_path/$a/oauth-2-client-credentials-grant.md) | The Credentials Setter for OAuth 2 Client Credentials Grant |
+| `clientCredentialsAuth` | [`ClientCredentialsAuth`](https://www.github.com/sdks-io/ev-recharge-php-sdk/tree/1.1.0/doc/$a/https://www.github.com/sdks-io/ev-recharge-php-sdk/tree/1.1.0/oauth-2-client-credentials-grant.md) | The Credentials Setter for OAuth 2 Client Credentials Grant |
 
 The API client can be initialized as follows:
 
@@ -74,25 +82,34 @@ $client = ShellEVClientBuilder::init()
         )
     )
     ->environment('production')
-    ->env(EnvEnum::ENUM_APITESTSHELLCOM)
     ->build();
 ```
+
+## Environments
+
+The SDK can be configured to use a different environment for making API calls. Available environments are:
+
+### Fields
+
+| Name | Description |
+|  --- | --- |
+| production | **Default** Production |
+| environment2 | Test |
 
 ## Authorization
 
 This API uses the following authentication schemes.
 
-* [`BearerAuth (OAuth 2 Client Credentials Grant)`](__base_path/$a/oauth-2-client-credentials-grant.md)
+* [`BearerAuth (OAuth 2 Client Credentials Grant)`](https://www.github.com/sdks-io/ev-recharge-php-sdk/tree/1.1.0/doc/$a/https://www.github.com/sdks-io/ev-recharge-php-sdk/tree/1.1.0/oauth-2-client-credentials-grant.md)
 
 ## List of APIs
 
-* [O Auth Authorization](doc/controllers/o-auth-authorization.md)
-* [Charging](doc/controllers/charging.md)
-* [Locations](doc/controllers/locations.md)
+* [Locations](https://www.github.com/sdks-io/ev-recharge-php-sdk/tree/1.1.0/doc/controllers/locations.md)
+* [Charging](https://www.github.com/sdks-io/ev-recharge-php-sdk/tree/1.1.0/doc/controllers/charging.md)
 
 ## Classes Documentation
 
-* [ApiException](doc/api-exception.md)
-* [HttpRequest](doc/http-request.md)
-* [HttpResponse](doc/http-response.md)
+* [ApiException](https://www.github.com/sdks-io/ev-recharge-php-sdk/tree/1.1.0/doc/api-exception.md)
+* [HttpRequest](https://www.github.com/sdks-io/ev-recharge-php-sdk/tree/1.1.0/doc/http-request.md)
+* [HttpResponse](https://www.github.com/sdks-io/ev-recharge-php-sdk/tree/1.1.0/doc/http-response.md)
 

@@ -108,12 +108,6 @@ class ShellEVClientBuilder
         return $this;
     }
 
-    public function env(string $env): self
-    {
-        $this->config['env'] = $env;
-        return $this;
-    }
-
     public function clientCredentialsAuthCredentials(
         ClientCredentialsAuthCredentialsBuilder $clientCredentialsAuth
     ): self {

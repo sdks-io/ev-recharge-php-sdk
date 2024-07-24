@@ -15,23 +15,15 @@ use stdClass;
 class InlineResponse202Data implements \JsonSerializable
 {
     /**
-     * @var string
+     * @var string|null
      */
     private $sessionId;
-
-    /**
-     * @param string $sessionId
-     */
-    public function __construct(string $sessionId)
-    {
-        $this->sessionId = $sessionId;
-    }
 
     /**
      * Returns Session Id.
      * Session Id for tracking.
      */
-    public function getSessionId(): string
+    public function getSessionId(): ?string
     {
         return $this->sessionId;
     }
@@ -40,10 +32,9 @@ class InlineResponse202Data implements \JsonSerializable
      * Sets Session Id.
      * Session Id for tracking.
      *
-     * @required
-     * @maps SessionId
+     * @maps sessionId
      */
-    public function setSessionId(string $sessionId): void
+    public function setSessionId(?string $sessionId): void
     {
         $this->sessionId = $sessionId;
     }
@@ -60,7 +51,9 @@ class InlineResponse202Data implements \JsonSerializable
     public function jsonSerialize(bool $asArrayWhenEmpty = false)
     {
         $json = [];
-        $json['SessionId'] = $this->sessionId;
+        if (isset($this->sessionId)) {
+            $json['sessionId'] = $this->sessionId;
+        }
 
         return (!$asArrayWhenEmpty && empty($json)) ? new stdClass() : $json;
     }

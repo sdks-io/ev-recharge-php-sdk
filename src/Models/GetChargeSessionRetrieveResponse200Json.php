@@ -41,8 +41,8 @@ class GetChargeSessionRetrieveResponse200Json implements \JsonSerializable
 
     /**
      * Returns Request Id.
-     * A unique request id in GUID format. The value is written to the Shell API Platform audit log for end
-     * to end traceability of a request.
+     * Mandatory UUID (according to RFC 4122 standards) for requests and responses. This will be played
+     * back in the response from the request.
      */
     public function getRequestId(): string
     {
@@ -51,11 +51,11 @@ class GetChargeSessionRetrieveResponse200Json implements \JsonSerializable
 
     /**
      * Sets Request Id.
-     * A unique request id in GUID format. The value is written to the Shell API Platform audit log for end
-     * to end traceability of a request.
+     * Mandatory UUID (according to RFC 4122 standards) for requests and responses. This will be played
+     * back in the response from the request.
      *
      * @required
-     * @maps RequestId
+     * @maps requestId
      */
     public function setRequestId(string $requestId): void
     {
@@ -76,7 +76,7 @@ class GetChargeSessionRetrieveResponse200Json implements \JsonSerializable
      * Indicates overall status of the request
      *
      * @required
-     * @maps Status
+     * @maps status
      * @factory \ShellEVLib\Models\GetChargeSessionRetrieveResponse200JsonStatusEnum::checkValue
      */
     public function setStatus(string $status): void
@@ -97,7 +97,7 @@ class GetChargeSessionRetrieveResponse200Json implements \JsonSerializable
     /**
      * Sets Data.
      *
-     * @maps Data
+     * @maps data
      *
      * @param DataRetrieve[]|null $data
      */
@@ -118,10 +118,10 @@ class GetChargeSessionRetrieveResponse200Json implements \JsonSerializable
     public function jsonSerialize(bool $asArrayWhenEmpty = false)
     {
         $json = [];
-        $json['RequestId'] = $this->requestId;
-        $json['Status']    = GetChargeSessionRetrieveResponse200JsonStatusEnum::checkValue($this->status);
+        $json['requestId'] = $this->requestId;
+        $json['status']    = GetChargeSessionRetrieveResponse200JsonStatusEnum::checkValue($this->status);
         if (isset($this->data)) {
-            $json['Data']  = $this->data;
+            $json['data']  = $this->data;
         }
 
         return (!$asArrayWhenEmpty && empty($json)) ? new stdClass() : $json;

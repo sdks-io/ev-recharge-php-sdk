@@ -17,7 +17,7 @@ An EVSE can have one or many Connectors. Each Connector will normally have a dif
 | `electricalProperties` | [`?ElectricalProperties`](../../doc/models/electrical-properties.md) | Optional | Electrical Properties of the Connector | getElectricalProperties(): ?ElectricalProperties | setElectricalProperties(?ElectricalProperties electricalProperties): void |
 | `fixedCable` | `?bool` | Optional | Indicates whether Connector has a fixed cable attached. False by default (not sent in this case) | getFixedCable(): ?bool | setFixedCable(?bool fixedCable): void |
 | `tariff` | [`?TariffVO`](../../doc/models/tariff-vo.md) | Optional | Tariff details for charging on this Connector | getTariff(): ?TariffVO | setTariff(?TariffVO tariff): void |
-| `updated` | `?string` | Optional | ISO8601-compliant UTC datetime of the last update of the Connectors's data | getUpdated(): ?string | setUpdated(?string updated): void |
+| `updated` | `?string` | Optional | ISO8601-compliant UTC datetime of the last update of the Connector’s data | getUpdated(): ?string | setUpdated(?string updated): void |
 | `updatedBy` | [`?string(ConnectorVOUpdatedByEnum)`](../../doc/models/connector-vo-updated-by-enum.md) | Optional | Source of the last update | getUpdatedBy(): ?string | setUpdatedBy(?string updatedBy): void |
 | `deleted` | `?string` | Optional | optional  ISO8601-compliant UTC deletion timestamp of the connector | getDeleted(): ?string | setDeleted(?string deleted): void |
 

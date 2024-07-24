@@ -14,7 +14,7 @@ Tariff details for charging on this Connector
 | `startFee` | `?float` | Optional | Tariff to start a charging session | getStartFee(): ?float | setStartFee(?float startFee): void |
 | `perMinute` | `?float` | Optional | Tariff per minute of charging time | getPerMinute(): ?float | setPerMinute(?float perMinute): void |
 | `perKWh` | `?float` | Optional | Tariff per kWh of energy consumed | getPerKWh(): ?float | setPerKWh(?float perKWh): void |
-| `currency` | `?string` | Optional | ISO 4217 Curreny Code of the local currency. | getCurrency(): ?string | setCurrency(?string currency): void |
+| `currency` | `?string` | Optional | ISO 4217 Currency Code of the local currency. | getCurrency(): ?string | setCurrency(?string currency): void |
 | `updated` | `?string` | Optional | ISO8601-compliant UTC datetime of the last update of the Tariff | getUpdated(): ?string | setUpdated(?string updated): void |
 | `updatedBy` | [`?string(TariffVOUpdatedByEnum)`](../../doc/models/tariff-vo-updated-by-enum.md) | Optional | Source of the last update of the tariff details | getUpdatedBy(): ?string | setUpdatedBy(?string updatedBy): void |
 | `structure` | `?string` | Optional | Tariff structure that this tariff belongs to, typically Default unless specific tariff is defined for provider | getStructure(): ?string | setStructure(?string structure): void |

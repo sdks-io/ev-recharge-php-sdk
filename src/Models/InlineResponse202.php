@@ -57,7 +57,7 @@ class InlineResponse202 implements \JsonSerializable
      * back in the response from the request.
      *
      * @required
-     * @maps RequestId
+     * @maps requestId
      */
     public function setRequestId(string $requestId): void
     {
@@ -78,7 +78,7 @@ class InlineResponse202 implements \JsonSerializable
      * Indicates overall status of the request
      *
      * @required
-     * @maps Status
+     * @maps status
      * @factory \ShellEVLib\Models\InlineResponse202StatusEnum::checkValue
      */
     public function setStatus(string $status): void
@@ -100,7 +100,7 @@ class InlineResponse202 implements \JsonSerializable
      * Sets Data.
      *
      * @required
-     * @maps Data
+     * @maps data
      *
      * @param InlineResponse202Data[] $data
      */
@@ -121,9 +121,9 @@ class InlineResponse202 implements \JsonSerializable
     public function jsonSerialize(bool $asArrayWhenEmpty = false)
     {
         $json = [];
-        $json['RequestId'] = $this->requestId;
-        $json['Status']    = InlineResponse202StatusEnum::checkValue($this->status);
-        $json['Data']      = $this->data;
+        $json['requestId'] = $this->requestId;
+        $json['status']    = InlineResponse202StatusEnum::checkValue($this->status);
+        $json['data']      = $this->data;
 
         return (!$asArrayWhenEmpty && empty($json)) ? new stdClass() : $json;
     }

@@ -77,7 +77,7 @@ class SingleLocationMarker implements \JsonSerializable
 
     /**
      * Returns Marker Type.
-     * Identifies the marker type. If it''s a `SingleLocationMarker`, then the value is `SingleLocation`
+     * Identifies the marker type. If it’s a `SingleLocationMarker`, then the value is `SingleLocation`
      */
     public function getMarkerType(): string
     {
@@ -86,7 +86,7 @@ class SingleLocationMarker implements \JsonSerializable
 
     /**
      * Sets Marker Type.
-     * Identifies the marker type. If it''s a `SingleLocationMarker`, then the value is `SingleLocation`
+     * Identifies the marker type. If it’s a `SingleLocationMarker`, then the value is `SingleLocation`
      *
      * @required
      * @maps markerType

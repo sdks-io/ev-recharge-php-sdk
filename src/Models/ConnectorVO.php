@@ -186,7 +186,7 @@ class ConnectorVO implements \JsonSerializable
 
     /**
      * Returns Updated.
-     * ISO8601-compliant UTC datetime of the last update of the Connectors's data
+     * ISO8601-compliant UTC datetime of the last update of the Connector’s data
      */
     public function getUpdated(): ?string
     {
@@ -195,7 +195,7 @@ class ConnectorVO implements \JsonSerializable
 
     /**
      * Sets Updated.
-     * ISO8601-compliant UTC datetime of the last update of the Connectors's data
+     * ISO8601-compliant UTC datetime of the last update of the Connector’s data
      *
      * @maps updated
      */

@@ -33,9 +33,18 @@ class InlineResponse202DataBuilder
     /**
      * Initializes a new inline response 202 data Builder object.
      */
-    public static function init(string $sessionId): self
+    public static function init(): self
     {
-        return new self(new InlineResponse202Data($sessionId));
+        return new self(new InlineResponse202Data());
+    }
+
+    /**
+     * Sets session id field.
+     */
+    public function sessionId(?string $value): self
+    {
+        $this->instance->setSessionId($value);
+        return $this;
     }
 
     /**

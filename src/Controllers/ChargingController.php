@@ -13,44 +13,38 @@ namespace ShellEVLib\Controllers;
 use Core\Request\Parameters\BodyParam;
 use Core\Request\Parameters\HeaderParam;
 use Core\Request\Parameters\QueryParam;
-use Core\Request\Parameters\TemplateParam;
 use Core\Response\Types\ErrorType;
 use CoreInterfaces\Core\Request\RequestMethod;
 use ShellEVLib\Exceptions\ApiException;
-use ShellEVLib\Exceptions\HTTP401ErrorResponseException;
-use ShellEVLib\Exceptions\M400ErrorResponseError1Exception;
-use ShellEVLib\Exceptions\M401ErrorResponseError1Exception;
-use ShellEVLib\Exceptions\M404ErrorResponseError1Exception;
-use ShellEVLib\Exceptions\M405ErrorResponseError1Exception;
-use ShellEVLib\Exceptions\M429ErrorResponseError1Exception;
-use ShellEVLib\Exceptions\M500ErrorResponseError1Exception;
-use ShellEVLib\Exceptions\M503ErrorResponseError1Exception;
+use ShellEVLib\Exceptions\BadRequestException;
+use ShellEVLib\Exceptions\InternalServerErrorException;
+use ShellEVLib\Exceptions\NotFoundException;
+use ShellEVLib\Exceptions\ServiceunavailableException;
+use ShellEVLib\Exceptions\TooManyRequestsException;
+use ShellEVLib\Exceptions\UnauthorizedException;
 use ShellEVLib\Models\ActiveResponse200Json;
 use ShellEVLib\Models\ChargesessionStartBody;
 use ShellEVLib\Models\GetChargeSessionRetrieveResponse200Json;
 use ShellEVLib\Models\InlineResponse202;
 use ShellEVLib\Models\InlineResponse2021;
-use ShellEVLib\Models\StopChargeSessionRequestBodyJson;
 
 class ChargingController extends BaseController
 {
     /**
-     * This API initiates to start a session on a EVSE (Electric Vehicle Supply Equipement). When the EV
-     * Charge Card number and the unique EVSE ID on the location is provided, the session is initiated.
+     * This endpoint start the charging session for the user.
      *
-     * Please note that this is an asynchronous request, the request will be passed on to the
-     * operator/platform to be processed further.
-     *
-     *
-     * @param string $requestId A unique request id in GUID format. The value is written to the
-     *        Shell API Platform audit log for end to end traceability of a request.
+     * @param string $requestId RequestId must be unique identifier value that can be used by the
+     *        consumer to correlate each request /response .<br>Format.<br> Its canonical textual
+     *        representation, the 16 octets of a UUID are represented as 32 hexadecimal (base-16)
+     *        digits, displayed in five groups separated by hyphens, in the form 8-4-4-4-12 for a
+     *        total of 36 characters (32 hexadecimal characters and 4 hyphens) <br>
      * @param ChargesessionStartBody|null $body
      *
      * @return InlineResponse202 Response from the API call
      *
      * @throws ApiException Thrown if API call fails
      */
-    public function startChargeSession(string $requestId, ?ChargesessionStartBody $body = null): InlineResponse202
+    public function start(string $requestId, ?ChargesessionStartBody $body = null): InlineResponse202
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/ev/v1/charge-session/start')
             ->auth('BearerAuth')
@@ -61,102 +55,100 @@ class ChargingController extends BaseController
             );
 
         $_resHandler = $this->responseHandler()
-            ->throwErrorOn('400', ErrorType::init("Bad Request\n", M400ErrorResponseError1Exception::class))
-            ->throwErrorOn('401', ErrorType::init('Unauthorized', HTTP401ErrorResponseException::class))
             ->throwErrorOn(
-                '404',
+                '400',
                 ErrorType::init(
-                    "Invalid charge token with given EmaId was not found.\n\nBackend HTTP 410 s" .
-                    "hould be transformed to 404.",
-                    M404ErrorResponseError1Exception::class
+                    'The server cannot or will not process the request due to something that is' .
+                    ' perceived to be a client error (e.g., malformed request syntax, invalid re' .
+                    'quest message framing, or deceptive request routing).',
+                    BadRequestException::class
                 )
             )
-            ->throwErrorOn('405', ErrorType::init('Method Not Allowed', M405ErrorResponseError1Exception::class))
-            ->throwErrorOn('429', ErrorType::init('Too Many Requests', M429ErrorResponseError1Exception::class))
             ->throwErrorOn(
-                '500',
-                ErrorType::init('Internal Server Error', M500ErrorResponseError1Exception::class)
-            )
-            ->throwErrorOn(
-                '503',
+                '401',
                 ErrorType::init(
-                    'Returned when a connectivity failure is encountered like DB connection fai' .
-                    'led, endpoint failed etc or when max number of retries are completed',
-                    M503ErrorResponseError1Exception::class
+                    'The request has not been applied because it lacks valid authentication cre' .
+                    'dentials for the target resource.',
+                    UnauthorizedException::class
                 )
             )
+            ->throwErrorOn('404', ErrorType::init('Location Not Found', NotFoundException::class))
+            ->throwErrorOn(
+                '429',
+                ErrorType::init(
+                    'The Request reached maximum allocated rate limit',
+                    TooManyRequestsException::class
+                )
+            )
+            ->throwErrorOn('500', ErrorType::init('Internal Server error', InternalServerErrorException::class))
+            ->throwErrorOn('503', ErrorType::init('Service unavailable', ServiceunavailableException::class))
             ->type(InlineResponse202::class);
 
         return $this->execute($_reqBuilder, $_resHandler);
     }
 
     /**
-     * This API stops a session by providing the session ID which was retrieved when starting the session.
-     * HTTP 202 response will be returned if the request is accepted. Once the session is stopped the
-     * response will contain the DateTime on which it is stopped.      operationId: Stop
+     * Accepts a request to stop an active session when a valid session id is provided.
      *
-     *
-     * @param string $requestId A unique request id in GUID format. The value is written to the
-     *        Shell API Platform audit log for end to end traceability of a request.
-     * @param string $uuid Unique session ID which was generated to activate a charging session.
-     * @param StopChargeSessionRequestBodyJson|null $body
+     * @param string $requestId RequestId must be unique identifier value that can be used by the
+     *        consumer to correlate each request /response .<br>Format.<br> Its canonical textual
+     *        representation, the 16 octets of a UUID are represented as 32 hexadecimal (base-16)
+     *        digits, displayed in five groups separated by hyphens, in the form 8-4-4-4-12 for a
+     *        total of 36 characters (32 hexadecimal characters and 4 hyphens) <br>
+     * @param string $sessionId Session Id
      *
      * @return InlineResponse2021 Response from the API call
      *
      * @throws ApiException Thrown if API call fails
      */
-    public function stopChargeSession(
-        string $requestId,
-        string $uuid,
-        ?StopChargeSessionRequestBodyJson $body = null
-    ): InlineResponse2021 {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/ev/v1/charge-session/stop/{uuid}')
+    public function stop(string $requestId, string $sessionId): InlineResponse2021
+    {
+        $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/ev/v1/charge-session/stop')
             ->auth('BearerAuth')
-            ->parameters(
-                HeaderParam::init('RequestId', $requestId),
-                TemplateParam::init('uuid', $uuid),
-                HeaderParam::init('Content-Type', 'application/json'),
-                BodyParam::init($body)
-            );
+            ->parameters(HeaderParam::init('RequestId', $requestId), QueryParam::init('sessionId', $sessionId));
 
         $_resHandler = $this->responseHandler()
-            ->throwErrorOn('400', ErrorType::init("Bad Request\n", M400ErrorResponseError1Exception::class))
-            ->throwErrorOn('401', ErrorType::init('Unauthorized', M401ErrorResponseError1Exception::class))
             ->throwErrorOn(
-                '404',
+                '400',
                 ErrorType::init(
-                    'Session not found or Session has already been stopped. Map 410 Error message into 404.',
-                    M404ErrorResponseError1Exception::class
+                    'The server cannot or will not process the request due to something that is' .
+                    ' perceived to be a client error (e.g., malformed request syntax, invalid re' .
+                    'quest message framing, or deceptive request routing).',
+                    BadRequestException::class
                 )
             )
-            ->throwErrorOn('405', ErrorType::init('Method Not Allowed', M405ErrorResponseError1Exception::class))
-            ->throwErrorOn('429', ErrorType::init('Too Many Requests', M429ErrorResponseError1Exception::class))
             ->throwErrorOn(
-                '500',
-                ErrorType::init('Internal Server Error', M500ErrorResponseError1Exception::class)
-            )
-            ->throwErrorOn(
-                '503',
+                '401',
                 ErrorType::init(
-                    "Returned when a connectivity failure is encountered like DB connection fai" .
-                    "led, endpoint failed etc or when max number of retries are completed\n",
-                    M503ErrorResponseError1Exception::class
+                    'The request has not been applied because it lacks valid authentication cre' .
+                    'dentials for the target resource.',
+                    UnauthorizedException::class
                 )
             )
+            ->throwErrorOn('404', ErrorType::init('Location Not Found', NotFoundException::class))
+            ->throwErrorOn(
+                '429',
+                ErrorType::init(
+                    'The Request reached maximum allocated rate limit',
+                    TooManyRequestsException::class
+                )
+            )
+            ->throwErrorOn('500', ErrorType::init('Internal Server error', InternalServerErrorException::class))
+            ->throwErrorOn('503', ErrorType::init('Service unavailable', ServiceunavailableException::class))
             ->type(InlineResponse2021::class);
 
         return $this->execute($_reqBuilder, $_resHandler);
     }
 
     /**
-     * This API retrieves the status and details of the session which was started by the user. The session
-     * ID generated earlier needs to be passed in this API in order to retrieve the status.
+     * This endpoint returns the details of the session if the session is found.
      *
-     *
-     * @param string $requestId A unique request id in GUID format. The value is written to the
-     *        Shell API Platform audit log for end to end traceability of a request.
-     * @param string $sessionId Session Id is to be fetched
-     * @param string $uuid Unique session ID which was generated to activate a charging session.
+     * @param string $requestId RequestId must be unique identifier value that can be used by the
+     *        consumer to correlate each request /response .<br>Format.<br> Its canonical textual
+     *        representation, the 16 octets of a UUID are represented as 32 hexadecimal (base-16)
+     *        digits, displayed in five groups separated by hyphens, in the form 8-4-4-4-12 for a
+     *        total of 36 characters (32 hexadecimal characters and 4 hyphens) <br>
+     * @param string $sessionId Session Id
      *
      * @return GetChargeSessionRetrieveResponse200Json Response from the API call
      *
@@ -164,75 +156,66 @@ class ChargingController extends BaseController
      */
     public function getChargeSessionRetrieve(
         string $requestId,
-        string $sessionId,
-        string $uuid
+        string $sessionId
     ): GetChargeSessionRetrieveResponse200Json {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/ev/v1/charge-session/retrieve/{uuid}')
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/ev/v1/charge-session/retrieve')
             ->auth('BearerAuth')
-            ->parameters(
-                HeaderParam::init('RequestId', $requestId),
-                QueryParam::init('SessionId', $sessionId),
-                TemplateParam::init('uuid', $uuid)
-            );
+            ->parameters(HeaderParam::init('RequestId', $requestId), QueryParam::init('sessionId', $sessionId));
 
         $_resHandler = $this->responseHandler()
-            ->throwErrorOn('400', ErrorType::init('Bad Request', M400ErrorResponseError1Exception::class))
-            ->throwErrorOn('401', ErrorType::init('Unauthorized', M401ErrorResponseError1Exception::class))
-            ->throwErrorOn('404', ErrorType::init('Not Found', M404ErrorResponseError1Exception::class))
-            ->throwErrorOn('405', ErrorType::init('Method Not Allowed', M405ErrorResponseError1Exception::class))
-            ->throwErrorOn('429', ErrorType::init('Too Many Requests', M429ErrorResponseError1Exception::class))
             ->throwErrorOn(
-                '500',
-                ErrorType::init('Internal Server Error', M500ErrorResponseError1Exception::class)
+                '400',
+                ErrorType::init(
+                    'The server cannot or will not process the request due to something that is' .
+                    ' perceived to be a client error (e.g., malformed request syntax, invalid re' .
+                    'quest message framing, or deceptive request routing).',
+                    BadRequestException::class
+                )
             )
-            ->throwErrorOn('503', ErrorType::init('Service Unavailable', M503ErrorResponseError1Exception::class))
+            ->throwErrorOn(
+                '401',
+                ErrorType::init(
+                    'The request has not been applied because it lacks valid authentication cre' .
+                    'dentials for the target resource.',
+                    UnauthorizedException::class
+                )
+            )
+            ->throwErrorOn('404', ErrorType::init('Location Not Found', NotFoundException::class))
+            ->throwErrorOn(
+                '429',
+                ErrorType::init(
+                    'The Request reached maximum allocated rate limit',
+                    TooManyRequestsException::class
+                )
+            )
+            ->throwErrorOn('500', ErrorType::init('Internal Server error', InternalServerErrorException::class))
+            ->throwErrorOn('503', ErrorType::init('Service unavailable', ServiceunavailableException::class))
             ->type(GetChargeSessionRetrieveResponse200Json::class);
 
         return $this->execute($_reqBuilder, $_resHandler);
     }
 
     /**
-     * This API retrieves the list of active sessions for a given set of EMAIds
+     * Fetrches the active sessions for user.
      *
+     * @param string $requestId RequestId must be unique identifier value that can be used by the
+     *        consumer to correlate each request /response .<br>Format.<br> Its canonical textual
+     *        representation, the 16 octets of a UUID are represented as 32 hexadecimal (base-16)
+     *        digits, displayed in five groups separated by hyphens, in the form 8-4-4-4-12 for a
+     *        total of 36 characters (32 hexadecimal characters and 4 hyphens) <br>
      * @param string $emaId Emobility Account Identifier(Ema-ID)
-     * @param string $requestId A unique request id in GUID format. The value is written to the
-     *        Shell API Platform audit log for end to end traceability of a request.
      *
      * @return ActiveResponse200Json Response from the API call
      *
      * @throws ApiException Thrown if API call fails
      */
-    public function active(string $emaId, string $requestId): ActiveResponse200Json
+    public function active(string $requestId, string $emaId): ActiveResponse200Json
     {
         $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/ev/v1/charge-session/active')
             ->auth('BearerAuth')
-            ->parameters(QueryParam::init('EmaId', $emaId), HeaderParam::init('RequestId', $requestId));
+            ->parameters(HeaderParam::init('RequestId', $requestId), QueryParam::init('emaId', $emaId));
 
-        $_resHandler = $this->responseHandler()
-            ->throwErrorOn('400', ErrorType::init("Bad Request\n", M400ErrorResponseError1Exception::class))
-            ->throwErrorOn('401', ErrorType::init('Unauthorized', M401ErrorResponseError1Exception::class))
-            ->throwErrorOn(
-                '404',
-                ErrorType::init(
-                    'Session not found or Session has already been stopped. Map 410 Error message into 404.',
-                    M404ErrorResponseError1Exception::class
-                )
-            )
-            ->throwErrorOn('405', ErrorType::init('Method Not Allowed', M405ErrorResponseError1Exception::class))
-            ->throwErrorOn('429', ErrorType::init('Too Many Requests', M429ErrorResponseError1Exception::class))
-            ->throwErrorOn(
-                '500',
-                ErrorType::init('Internal Server Error', M500ErrorResponseError1Exception::class)
-            )
-            ->throwErrorOn(
-                '503',
-                ErrorType::init(
-                    "Returned when a connectivity failure is encountered like DB connection fai" .
-                    "led, endpoint failed etc or when max number of retries are completed\n",
-                    M503ErrorResponseError1Exception::class
-                )
-            )
-            ->type(ActiveResponse200Json::class);
+        $_resHandler = $this->responseHandler()->type(ActiveResponse200Json::class);
 
         return $this->execute($_reqBuilder, $_resHandler);
     }

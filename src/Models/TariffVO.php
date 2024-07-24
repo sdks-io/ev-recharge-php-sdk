@@ -114,7 +114,7 @@ class TariffVO implements \JsonSerializable
 
     /**
      * Returns Currency.
-     * ISO 4217 Curreny Code of the local currency.
+     * ISO 4217 Currency Code of the local currency.
      */
     public function getCurrency(): ?string
     {
@@ -123,7 +123,7 @@ class TariffVO implements \JsonSerializable
 
     /**
      * Sets Currency.
-     * ISO 4217 Curreny Code of the local currency.
+     * ISO 4217 Currency Code of the local currency.
      *
      * @maps currency
      */

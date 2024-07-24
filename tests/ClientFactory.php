@@ -22,12 +22,7 @@ class ClientFactory
         $clientBuilder = ShellEVClientBuilder::init();
         $clientBuilder = self::addConfigurationFromEnvironment($clientBuilder);
         $clientBuilder = self::addTestConfiguration($clientBuilder);
-        $client = $clientBuilder->httpCallback($httpCallback)->build();
-        $oAuthToken = $client->getClientCredentialsAuth()->fetchToken();
-        $clientBuilder->clientCredentialsAuthCredentials(
-            $client->getClientCredentialsAuthCredentialsBuilder()->oAuthToken($oAuthToken)
-        );
-        return $clientBuilder->build();
+        return $clientBuilder->httpCallback($httpCallback)->build();
     }
 
     public static function addTestConfiguration(ShellEVClientBuilder $builder): ShellEVClientBuilder
@@ -41,7 +36,6 @@ class ClientFactory
         $numberOfRetries = getenv('SHELL_EV_LIB_NUMBER_OF_RETRIES');
         $maximumRetryWaitTime = getenv('SHELL_EV_LIB_MAXIMUM_RETRY_WAIT_TIME');
         $environment = getenv('SHELL_EV_LIB_ENVIRONMENT');
-        $env = getenv('SHELL_EV_LIB_ENV');
         $oAuthClientId = getenv('SHELL_EV_LIB_O_AUTH_CLIENT_ID');
         $oAuthClientSecret = getenv('SHELL_EV_LIB_O_AUTH_CLIENT_SECRET');
 
@@ -59,10 +53,6 @@ class ClientFactory
 
         if (!empty($environment)) {
             $builder->environment($environment);
-        }
-
-        if (!empty($env)) {
-            $builder->env($env);
         }
 
         if (!empty($oAuthClientId) && !empty($oAuthClientSecret)) {

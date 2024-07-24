@@ -15,50 +15,81 @@ class BadRequestException extends ApiException
     /**
      * @var string|null
      */
-    private $codeProperty;
+    private $requestId;
 
     /**
      * @var string|null
      */
-    private $messageProperty;
+    private $status;
 
     /**
-     * Returns Code Property.
-     * Error code
+     * @var \ShellEVLib\Models\BadRequestErrMsg[]|null
      */
-    public function getCodeProperty(): ?string
+    private $errors;
+
+    /**
+     * Returns Request Id.
+     * requestId is unique identifier value that is attached to requests and messages that allow reference
+     * to a particular transaction or event chain.
+     */
+    public function getRequestId(): ?string
     {
-        return $this->codeProperty;
+        return $this->requestId;
     }
 
     /**
-     * Sets Code Property.
-     * Error code
+     * Sets Request Id.
+     * requestId is unique identifier value that is attached to requests and messages that allow reference
+     * to a particular transaction or event chain.
      *
-     * @maps code
+     * @maps requestId
      */
-    public function setCodeProperty(?string $codeProperty): void
+    public function setRequestId(?string $requestId): void
     {
-        $this->codeProperty = $codeProperty;
+        $this->requestId = $requestId;
     }
 
     /**
-     * Returns Message Property.
-     * Error desctiption in English
+     * Returns Status.
+     * Status of the request
      */
-    public function getMessageProperty(): ?string
+    public function getStatus(): ?string
     {
-        return $this->messageProperty;
+        return $this->status;
     }
 
     /**
-     * Sets Message Property.
-     * Error desctiption in English
+     * Sets Status.
+     * Status of the request
      *
-     * @maps message
+     * @maps status
      */
-    public function setMessageProperty(?string $messageProperty): void
+    public function setStatus(?string $status): void
     {
-        $this->messageProperty = $messageProperty;
+        $this->status = $status;
+    }
+
+    /**
+     * Returns Errors.
+     * Exception details of the error
+     *
+     * @return \ShellEVLib\Models\BadRequestErrMsg[]|null
+     */
+    public function getErrors(): ?array
+    {
+        return $this->errors;
+    }
+
+    /**
+     * Sets Errors.
+     * Exception details of the error
+     *
+     * @maps errors
+     *
+     * @param \ShellEVLib\Models\BadRequestErrMsg[]|null $errors
+     */
+    public function setErrors(?array $errors): void
+    {
+        $this->errors = $errors;
     }
 }
