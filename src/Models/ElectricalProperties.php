@@ -39,7 +39,6 @@ class ElectricalProperties implements \JsonSerializable
 
     /**
      * Returns Power Type.
-     * Power Type used in this connector.
      */
     public function getPowerType(): ?string
     {
@@ -48,7 +47,6 @@ class ElectricalProperties implements \JsonSerializable
 
     /**
      * Sets Power Type.
-     * Power Type used in this connector.
      *
      * @maps powerType
      * @factory \ShellEVLib\Models\ElectricalPropertiesPowerTypeEnum::checkValue

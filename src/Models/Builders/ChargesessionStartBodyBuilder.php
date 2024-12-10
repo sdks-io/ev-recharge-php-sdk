@@ -31,7 +31,10 @@ class ChargesessionStartBodyBuilder
     }
 
     /**
-     * Initializes a new chargesession start body Builder object.
+     * Initializes a new Chargesession Start Body Builder object.
+     *
+     * @param string $evChargeNumber
+     * @param string $evseId
      */
     public static function init(string $evChargeNumber, string $evseId): self
     {
@@ -39,7 +42,7 @@ class ChargesessionStartBodyBuilder
     }
 
     /**
-     * Initializes a new chargesession start body object.
+     * Initializes a new Chargesession Start Body object.
      */
     public function build(): ChargesessionStartBody
     {

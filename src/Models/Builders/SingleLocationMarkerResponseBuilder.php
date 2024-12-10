@@ -11,6 +11,8 @@ declare(strict_types=1);
 namespace ShellEVLib\Models\Builders;
 
 use Core\Utils\CoreHelper;
+use ShellEVLib\Models\MultiLocationMarker;
+use ShellEVLib\Models\SingleLocationMarker;
 use ShellEVLib\Models\SingleLocationMarkerResponse;
 
 /**
@@ -31,7 +33,7 @@ class SingleLocationMarkerResponseBuilder
     }
 
     /**
-     * Initializes a new single location marker response Builder object.
+     * Initializes a new Single Location Marker Response Builder object.
      */
     public static function init(): self
     {
@@ -39,7 +41,9 @@ class SingleLocationMarkerResponseBuilder
     }
 
     /**
-     * Sets request id field.
+     * Sets request Id field.
+     *
+     * @param string|null $value
      */
     public function requestId(?string $value): self
     {
@@ -49,6 +53,8 @@ class SingleLocationMarkerResponseBuilder
 
     /**
      * Sets status field.
+     *
+     * @param string|null $value
      */
     public function status(?string $value): self
     {
@@ -58,6 +64,8 @@ class SingleLocationMarkerResponseBuilder
 
     /**
      * Sets data field.
+     *
+     * @param array<SingleLocationMarker|MultiLocationMarker>|null $value
      */
     public function data(?array $value): self
     {
@@ -66,7 +74,7 @@ class SingleLocationMarkerResponseBuilder
     }
 
     /**
-     * Initializes a new single location marker response object.
+     * Initializes a new Single Location Marker Response object.
      */
     public function build(): SingleLocationMarkerResponse
     {

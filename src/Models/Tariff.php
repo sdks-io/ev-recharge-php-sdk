@@ -12,10 +12,7 @@ namespace ShellEVLib\Models;
 
 use stdClass;
 
-/**
- * Tariff details for charging on this Connector
- */
-class TariffVO implements \JsonSerializable
+class Tariff implements \JsonSerializable
 {
     /**
      * @var float|null

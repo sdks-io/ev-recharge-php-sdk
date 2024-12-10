@@ -31,7 +31,7 @@ class InternalErrorObjectBuilder
     }
 
     /**
-     * Initializes a new internal error object Builder object.
+     * Initializes a new Internal Error Object Builder object.
      */
     public static function init(): self
     {
@@ -40,6 +40,8 @@ class InternalErrorObjectBuilder
 
     /**
      * Sets code field.
+     *
+     * @param string|null $value
      */
     public function code(?string $value): self
     {
@@ -49,6 +51,8 @@ class InternalErrorObjectBuilder
 
     /**
      * Sets message field.
+     *
+     * @param string|null $value
      */
     public function message(?string $value): self
     {
@@ -58,6 +62,8 @@ class InternalErrorObjectBuilder
 
     /**
      * Sets description field.
+     *
+     * @param string|null $value
      */
     public function description(?string $value): self
     {
@@ -66,7 +72,7 @@ class InternalErrorObjectBuilder
     }
 
     /**
-     * Initializes a new internal error object object.
+     * Initializes a new Internal Error Object object.
      */
     public function build(): InternalErrorObject
     {

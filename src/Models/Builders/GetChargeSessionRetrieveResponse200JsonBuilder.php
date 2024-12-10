@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace ShellEVLib\Models\Builders;
 
 use Core\Utils\CoreHelper;
+use ShellEVLib\Models\DataRetrieve;
 use ShellEVLib\Models\GetChargeSessionRetrieveResponse200Json;
 
 /**
@@ -31,7 +32,10 @@ class GetChargeSessionRetrieveResponse200JsonBuilder
     }
 
     /**
-     * Initializes a new get charge session retrieve response 200 json Builder object.
+     * Initializes a new Get Charge Session Retrieve Response 200 Json Builder object.
+     *
+     * @param string $requestId
+     * @param string $status
      */
     public static function init(string $requestId, string $status): self
     {
@@ -40,6 +44,8 @@ class GetChargeSessionRetrieveResponse200JsonBuilder
 
     /**
      * Sets data field.
+     *
+     * @param DataRetrieve[]|null $value
      */
     public function data(?array $value): self
     {
@@ -48,7 +54,7 @@ class GetChargeSessionRetrieveResponse200JsonBuilder
     }
 
     /**
-     * Initializes a new get charge session retrieve response 200 json object.
+     * Initializes a new Get Charge Session Retrieve Response 200 Json object.
      */
     public function build(): GetChargeSessionRetrieveResponse200Json
     {

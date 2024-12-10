@@ -14,6 +14,9 @@ use Core\Utils\CoreHelper;
 use Exception;
 use stdClass;
 
+/**
+ * Filter by Locations that support the given Authorization Methods
+ */
 class LocationsMarkersAuthorizationMethodsEnum
 {
     public const NEWMOTIONAPP = 'NewMotionApp';

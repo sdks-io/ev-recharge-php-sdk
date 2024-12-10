@@ -64,7 +64,6 @@ class ActiveResponse200Json implements \JsonSerializable
 
     /**
      * Returns Status.
-     * Indicates overall status of the request
      */
     public function getStatus(): string
     {
@@ -73,11 +72,10 @@ class ActiveResponse200Json implements \JsonSerializable
 
     /**
      * Sets Status.
-     * Indicates overall status of the request
      *
      * @required
      * @maps status
-     * @factory \ShellEVLib\Models\ActiveResponse200JsonStatusEnum::checkValue
+     * @factory \ShellEVLib\Models\GetChargeSessionRetrieveResponse200JsonStatusEnum::checkValue
      */
     public function setStatus(string $status): void
     {
@@ -119,7 +117,7 @@ class ActiveResponse200Json implements \JsonSerializable
     {
         $json = [];
         $json['requestId'] = $this->requestId;
-        $json['status']    = ActiveResponse200JsonStatusEnum::checkValue($this->status);
+        $json['status']    = GetChargeSessionRetrieveResponse200JsonStatusEnum::checkValue($this->status);
         if (isset($this->data)) {
             $json['data']  = $this->data;
         }

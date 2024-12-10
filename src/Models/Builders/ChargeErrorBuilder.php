@@ -31,7 +31,7 @@ class ChargeErrorBuilder
     }
 
     /**
-     * Initializes a new charge error Builder object.
+     * Initializes a new Charge Error Builder object.
      */
     public static function init(): self
     {
@@ -40,6 +40,8 @@ class ChargeErrorBuilder
 
     /**
      * Sets code field.
+     *
+     * @param string|null $value
      */
     public function code(?string $value): self
     {
@@ -49,6 +51,8 @@ class ChargeErrorBuilder
 
     /**
      * Sets message field.
+     *
+     * @param string|null $value
      */
     public function message(?string $value): self
     {
@@ -57,7 +61,7 @@ class ChargeErrorBuilder
     }
 
     /**
-     * Initializes a new charge error object.
+     * Initializes a new Charge Error object.
      */
     public function build(): ChargeError
     {

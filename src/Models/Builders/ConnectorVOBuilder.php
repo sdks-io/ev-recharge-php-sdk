@@ -13,7 +13,7 @@ namespace ShellEVLib\Models\Builders;
 use Core\Utils\CoreHelper;
 use ShellEVLib\Models\ConnectorVO;
 use ShellEVLib\Models\ElectricalProperties;
-use ShellEVLib\Models\TariffVO;
+use ShellEVLib\Models\Tariff;
 
 /**
  * Builder for model ConnectorVO
@@ -33,7 +33,7 @@ class ConnectorVOBuilder
     }
 
     /**
-     * Initializes a new connector vo Builder object.
+     * Initializes a new Connector VO Builder object.
      */
     public static function init(): self
     {
@@ -42,6 +42,8 @@ class ConnectorVOBuilder
 
     /**
      * Sets uid field.
+     *
+     * @param int|null $value
      */
     public function uid(?int $value): self
     {
@@ -50,7 +52,9 @@ class ConnectorVOBuilder
     }
 
     /**
-     * Sets external id field.
+     * Sets external Id field.
+     *
+     * @param string|null $value
      */
     public function externalId(?string $value): self
     {
@@ -59,7 +63,9 @@ class ConnectorVOBuilder
     }
 
     /**
-     * Sets connector type field.
+     * Sets connector Type field.
+     *
+     * @param string|null $value
      */
     public function connectorType(?string $value): self
     {
@@ -68,7 +74,9 @@ class ConnectorVOBuilder
     }
 
     /**
-     * Sets electrical properties field.
+     * Sets electrical Properties field.
+     *
+     * @param ElectricalProperties|null $value
      */
     public function electricalProperties(?ElectricalProperties $value): self
     {
@@ -77,7 +85,9 @@ class ConnectorVOBuilder
     }
 
     /**
-     * Sets fixed cable field.
+     * Sets fixed Cable field.
+     *
+     * @param bool|null $value
      */
     public function fixedCable(?bool $value): self
     {
@@ -87,8 +97,10 @@ class ConnectorVOBuilder
 
     /**
      * Sets tariff field.
+     *
+     * @param Tariff|null $value
      */
-    public function tariff(?TariffVO $value): self
+    public function tariff(?Tariff $value): self
     {
         $this->instance->setTariff($value);
         return $this;
@@ -96,6 +108,8 @@ class ConnectorVOBuilder
 
     /**
      * Sets updated field.
+     *
+     * @param string|null $value
      */
     public function updated(?string $value): self
     {
@@ -104,7 +118,9 @@ class ConnectorVOBuilder
     }
 
     /**
-     * Sets updated by field.
+     * Sets updated By field.
+     *
+     * @param string|null $value
      */
     public function updatedBy(?string $value): self
     {
@@ -114,6 +130,8 @@ class ConnectorVOBuilder
 
     /**
      * Sets deleted field.
+     *
+     * @param string|null $value
      */
     public function deleted(?string $value): self
     {
@@ -122,7 +140,7 @@ class ConnectorVOBuilder
     }
 
     /**
-     * Initializes a new connector vo object.
+     * Initializes a new Connector VO object.
      */
     public function build(): ConnectorVO
     {

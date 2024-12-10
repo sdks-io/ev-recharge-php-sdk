@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace ShellEVLib\Models\Builders;
 
 use Core\Utils\CoreHelper;
+use ShellEVLib\Models\ConnectorVO;
 use ShellEVLib\Models\EvseVO;
 
 /**
@@ -31,7 +32,7 @@ class EvseVOBuilder
     }
 
     /**
-     * Initializes a new evse vo Builder object.
+     * Initializes a new Evse VO Builder object.
      */
     public static function init(): self
     {
@@ -40,6 +41,8 @@ class EvseVOBuilder
 
     /**
      * Sets uid field.
+     *
+     * @param int|null $value
      */
     public function uid(?int $value): self
     {
@@ -48,7 +51,9 @@ class EvseVOBuilder
     }
 
     /**
-     * Sets external id field.
+     * Sets external Id field.
+     *
+     * @param string|null $value
      */
     public function externalId(?string $value): self
     {
@@ -57,7 +62,9 @@ class EvseVOBuilder
     }
 
     /**
-     * Sets evse id field.
+     * Sets evse Id field.
+     *
+     * @param string|null $value
      */
     public function evseId(?string $value): self
     {
@@ -67,6 +74,8 @@ class EvseVOBuilder
 
     /**
      * Sets status field.
+     *
+     * @param string|null $value
      */
     public function status(?string $value): self
     {
@@ -76,6 +85,8 @@ class EvseVOBuilder
 
     /**
      * Sets connectors field.
+     *
+     * @param ConnectorVO[]|null $value
      */
     public function connectors(?array $value): self
     {
@@ -84,7 +95,9 @@ class EvseVOBuilder
     }
 
     /**
-     * Sets authorization methods field.
+     * Sets authorization Methods field.
+     *
+     * @param string|null $value
      */
     public function authorizationMethods(?string $value): self
     {
@@ -94,6 +107,8 @@ class EvseVOBuilder
 
     /**
      * Sets updated field.
+     *
+     * @param string|null $value
      */
     public function updated(?string $value): self
     {
@@ -103,6 +118,8 @@ class EvseVOBuilder
 
     /**
      * Sets deleted field.
+     *
+     * @param string|null $value
      */
     public function deleted(?string $value): self
     {
@@ -111,7 +128,9 @@ class EvseVOBuilder
     }
 
     /**
-     * Sets physical reference field.
+     * Sets physical Reference field.
+     *
+     * @param string|null $value
      */
     public function physicalReference(?string $value): self
     {
@@ -120,7 +139,7 @@ class EvseVOBuilder
     }
 
     /**
-     * Initializes a new evse vo object.
+     * Initializes a new Evse VO object.
      */
     public function build(): EvseVO
     {

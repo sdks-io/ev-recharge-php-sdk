@@ -31,7 +31,7 @@ class AccessibilityBuilder
     }
 
     /**
-     * Initializes a new accessibility Builder object.
+     * Initializes a new Accessibility Builder object.
      */
     public static function init(): self
     {
@@ -40,6 +40,8 @@ class AccessibilityBuilder
 
     /**
      * Sets status field.
+     *
+     * @param string|null $value
      */
     public function status(?string $value): self
     {
@@ -49,6 +51,8 @@ class AccessibilityBuilder
 
     /**
      * Sets remark field.
+     *
+     * @param string|null $value
      */
     public function remark(?string $value): self
     {
@@ -57,7 +61,7 @@ class AccessibilityBuilder
     }
 
     /**
-     * Initializes a new accessibility object.
+     * Initializes a new Accessibility object.
      */
     public function build(): Accessibility
     {

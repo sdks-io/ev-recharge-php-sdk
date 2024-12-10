@@ -29,7 +29,6 @@ class ChargeRetrieveState implements \JsonSerializable
      * Describes the session state
      *
      *
-     *
      * started, stopped, start-requested, stop-requested, failed-to-start, failed-to-stop
      */
     public function getStatus(): ?string
@@ -40,7 +39,6 @@ class ChargeRetrieveState implements \JsonSerializable
     /**
      * Sets Status.
      * Describes the session state
-     *
      *
      *
      * started, stopped, start-requested, stop-requested, failed-to-start, failed-to-stop

@@ -15,7 +15,7 @@ The following parameters are configurable for the API Client:
 | `retryOnTimeout` | `bool` | Whether to retry on request timeout.<br>*Default*: `true` |
 | `httpStatusCodesToRetry` | `array` | Http status codes to retry against.<br>*Default*: `408, 413, 429, 500, 502, 503, 504, 521, 522, 524` |
 | `httpMethodsToRetry` | `array` | Http methods to retry against.<br>*Default*: `'GET', 'PUT'` |
-| `clientCredentialsAuth` | [`ClientCredentialsAuth`]($a/oauth-2-client-credentials-grant.md) | The Credentials Setter for OAuth 2 Client Credentials Grant |
+| `clientCredentialsAuth` | [`ClientCredentialsAuth`](auth/oauth-2-client-credentials-grant.md) | The Credentials Setter for OAuth 2 Client Credentials Grant |
 
 The API client can be initialized as follows:
 
@@ -27,7 +27,7 @@ $client = ShellEVClientBuilder::init()
             'OAuthClientSecret'
         )
     )
-    ->environment('production')
+    ->environment(Environment::PRODUCTION)
     ->build();
 ```
 

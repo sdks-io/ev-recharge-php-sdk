@@ -25,12 +25,7 @@ use ShellEVLib\Exceptions\UnauthorizedException;
 use ShellEVLib\Models\GetEVLocationsAuthorizationMethodsEnum;
 use ShellEVLib\Models\GetEVLocationsConnectorTypesEnum;
 use ShellEVLib\Models\GetEVLocationsEvseStatusEnum;
-use ShellEVLib\Models\LocationsMarkersAuthorizationMethodsEnum;
-use ShellEVLib\Models\LocationsMarkersConnectorTypesEnum;
-use ShellEVLib\Models\LocationsMarkersEvseStatusEnum;
-use ShellEVLib\Models\NearbyLocationsAuthorizationMethodsEnum;
 use ShellEVLib\Models\NearbyLocationsConnectorTypesEnum;
-use ShellEVLib\Models\NearbyLocationsEvseStatusEnum;
 use ShellEVLib\Models\Response;
 use ShellEVLib\Models\SingleLocationMarkerResponse;
 
@@ -98,7 +93,7 @@ class LocationsController extends BaseController
         ?array $country = null,
         ?array $excludeCountry = null
     ): Response {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/locations/v1/ev')
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/locations')
             ->auth('BearerAuth')
             ->parameters(
                 HeaderParam::init('RequestId', $requestId),
@@ -177,7 +172,7 @@ class LocationsController extends BaseController
         ?string $providerId = null,
         ?string $since = null
     ): Response {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/locations/v1/ev/{id}')
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/locations/{id}')
             ->auth('BearerAuth')
             ->parameters(
                 HeaderParam::init('RequestId', $requestId),
@@ -286,7 +281,7 @@ class LocationsController extends BaseController
         ?array $country = null,
         ?array $excludeCountry = null
     ): Response {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/locations/v1/ev/nearby')
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/locations/nearby')
             ->auth('BearerAuth')
             ->parameters(
                 HeaderParam::init('RequestId', $requestId),
@@ -298,12 +293,12 @@ class LocationsController extends BaseController
                 QueryParam::init('evseExternalId', $evseExternalId),
                 QueryParam::init('operatorName', $operatorName),
                 QueryParam::init('evseStatus', $evseStatus)
-                    ->serializeBy([NearbyLocationsEvseStatusEnum::class, 'checkValue']),
+                    ->serializeBy([GetEVLocationsEvseStatusEnum::class, 'checkValue']),
                 QueryParam::init('connectorTypes', $connectorTypes)
                     ->serializeBy([NearbyLocationsConnectorTypesEnum::class, 'checkValue']),
                 QueryParam::init('connectorMinPower', $connectorMinPower),
                 QueryParam::init('authorizationMethods', $authorizationMethods)
-                    ->serializeBy([NearbyLocationsAuthorizationMethodsEnum::class, 'checkValue']),
+                    ->serializeBy([GetEVLocationsAuthorizationMethodsEnum::class, 'checkValue']),
                 QueryParam::init('withOperatorName', $withOperatorName),
                 QueryParam::init('withMaxPower', $withMaxPower),
                 QueryParam::init('country', $country),
@@ -412,7 +407,7 @@ class LocationsController extends BaseController
         ?array $country = null,
         ?array $excludeCountry = null
     ): SingleLocationMarkerResponse {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/locations/v1/ev/markers')
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/locations/markers')
             ->auth('BearerAuth')
             ->parameters(
                 HeaderParam::init('RequestId', $requestId),
@@ -422,12 +417,12 @@ class LocationsController extends BaseController
                 QueryParam::init('north', $north),
                 QueryParam::init('zoom', $zoom),
                 QueryParam::init('evseStatus', $evseStatus)
-                    ->serializeBy([LocationsMarkersEvseStatusEnum::class, 'checkValue']),
+                    ->serializeBy([GetEVLocationsEvseStatusEnum::class, 'checkValue']),
                 QueryParam::init('connectorTypes', $connectorTypes)
-                    ->serializeBy([LocationsMarkersConnectorTypesEnum::class, 'checkValue']),
+                    ->serializeBy([GetEVLocationsConnectorTypesEnum::class, 'checkValue']),
                 QueryParam::init('connectorMinPower', $connectorMinPower),
                 QueryParam::init('authorizationMethods', $authorizationMethods)
-                    ->serializeBy([LocationsMarkersAuthorizationMethodsEnum::class, 'checkValue']),
+                    ->serializeBy([GetEVLocationsAuthorizationMethodsEnum::class, 'checkValue']),
                 QueryParam::init('withOperatorName', $withOperatorName),
                 QueryParam::init('withMaxPower', $withMaxPower),
                 QueryParam::init('locationExternalId', $locationExternalId),

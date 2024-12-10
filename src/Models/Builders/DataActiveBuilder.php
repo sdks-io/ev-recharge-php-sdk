@@ -32,7 +32,7 @@ class DataActiveBuilder
     }
 
     /**
-     * Initializes a new data active Builder object.
+     * Initializes a new Data Active Builder object.
      */
     public static function init(): self
     {
@@ -41,6 +41,8 @@ class DataActiveBuilder
 
     /**
      * Sets id field.
+     *
+     * @param string|null $value
      */
     public function id(?string $value): self
     {
@@ -49,7 +51,9 @@ class DataActiveBuilder
     }
 
     /**
-     * Sets user id field.
+     * Sets user Id field.
+     *
+     * @param string|null $value
      */
     public function userId(?string $value): self
     {
@@ -58,7 +62,9 @@ class DataActiveBuilder
     }
 
     /**
-     * Sets ema id field.
+     * Sets ema Id field.
+     *
+     * @param string|null $value
      */
     public function emaId(?string $value): self
     {
@@ -67,7 +73,9 @@ class DataActiveBuilder
     }
 
     /**
-     * Sets evse id field.
+     * Sets evse Id field.
+     *
+     * @param string|null $value
      */
     public function evseId(?string $value): self
     {
@@ -76,7 +84,9 @@ class DataActiveBuilder
     }
 
     /**
-     * Sets started at field.
+     * Sets started At field.
+     *
+     * @param \DateTime|null $value
      */
     public function startedAt(?\DateTime $value): self
     {
@@ -85,7 +95,9 @@ class DataActiveBuilder
     }
 
     /**
-     * Sets stopped at field.
+     * Sets stopped At field.
+     *
+     * @param \DateTime|null $value
      */
     public function stoppedAt(?\DateTime $value): self
     {
@@ -94,7 +106,7 @@ class DataActiveBuilder
     }
 
     /**
-     * Unsets stopped at field.
+     * Unsets stopped At field.
      */
     public function unsetStoppedAt(): self
     {
@@ -103,7 +115,9 @@ class DataActiveBuilder
     }
 
     /**
-     * Sets session state field.
+     * Sets Session State field.
+     *
+     * @param ChargeRetrieveState|null $value
      */
     public function sessionState(?ChargeRetrieveState $value): self
     {
@@ -112,7 +126,9 @@ class DataActiveBuilder
     }
 
     /**
-     * Sets last updated field.
+     * Sets last Updated field.
+     *
+     * @param string|null $value
      */
     public function lastUpdated(?string $value): self
     {
@@ -121,7 +137,7 @@ class DataActiveBuilder
     }
 
     /**
-     * Initializes a new data active object.
+     * Initializes a new Data Active object.
      */
     public function build(): DataActive
     {

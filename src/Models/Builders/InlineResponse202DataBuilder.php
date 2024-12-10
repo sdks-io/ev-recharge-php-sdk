@@ -31,7 +31,7 @@ class InlineResponse202DataBuilder
     }
 
     /**
-     * Initializes a new inline response 202 data Builder object.
+     * Initializes a new Inline Response 202 Data Builder object.
      */
     public static function init(): self
     {
@@ -39,7 +39,9 @@ class InlineResponse202DataBuilder
     }
 
     /**
-     * Sets session id field.
+     * Sets session Id field.
+     *
+     * @param string|null $value
      */
     public function sessionId(?string $value): self
     {
@@ -48,7 +50,7 @@ class InlineResponse202DataBuilder
     }
 
     /**
-     * Initializes a new inline response 202 data object.
+     * Initializes a new Inline Response 202 Data object.
      */
     public function build(): InlineResponse202Data
     {

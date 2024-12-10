@@ -12,6 +12,7 @@ namespace ShellEVLib\Models\Builders;
 
 use Core\Utils\CoreHelper;
 use ShellEVLib\Models\ActiveResponse200Json;
+use ShellEVLib\Models\DataActive;
 
 /**
  * Builder for model ActiveResponse200Json
@@ -31,7 +32,10 @@ class ActiveResponse200JsonBuilder
     }
 
     /**
-     * Initializes a new active response 200 json Builder object.
+     * Initializes a new Active Response 200 Json Builder object.
+     *
+     * @param string $requestId
+     * @param string $status
      */
     public static function init(string $requestId, string $status): self
     {
@@ -40,6 +44,8 @@ class ActiveResponse200JsonBuilder
 
     /**
      * Sets data field.
+     *
+     * @param DataActive[]|null $value
      */
     public function data(?array $value): self
     {
@@ -48,7 +54,7 @@ class ActiveResponse200JsonBuilder
     }
 
     /**
-     * Initializes a new active response 200 json object.
+     * Initializes a new Active Response 200 Json object.
      */
     public function build(): ActiveResponse200Json
     {

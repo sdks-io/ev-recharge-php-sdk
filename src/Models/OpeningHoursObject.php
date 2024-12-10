@@ -31,7 +31,6 @@ class OpeningHoursObject implements \JsonSerializable
 
     /**
      * Returns Week Day.
-     * 3 letter day of the week
      */
     public function getWeekDay(): ?string
     {
@@ -40,7 +39,6 @@ class OpeningHoursObject implements \JsonSerializable
 
     /**
      * Sets Week Day.
-     * 3 letter day of the week
      *
      * @maps weekDay
      * @factory \ShellEVLib\Models\OpeningHoursObjectWeekDayEnum::checkValue

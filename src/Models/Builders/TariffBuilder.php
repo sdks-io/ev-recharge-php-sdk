@@ -11,31 +11,31 @@ declare(strict_types=1);
 namespace ShellEVLib\Models\Builders;
 
 use Core\Utils\CoreHelper;
-use ShellEVLib\Models\TariffVO;
+use ShellEVLib\Models\Tariff;
 
 /**
- * Builder for model TariffVO
+ * Builder for model Tariff
  *
- * @see TariffVO
+ * @see Tariff
  */
-class TariffVOBuilder
+class TariffBuilder
 {
     /**
-     * @var TariffVO
+     * @var Tariff
      */
     private $instance;
 
-    private function __construct(TariffVO $instance)
+    private function __construct(Tariff $instance)
     {
         $this->instance = $instance;
     }
 
     /**
-     * Initializes a new Tariff VO Builder object.
+     * Initializes a new Tariff Builder object.
      */
     public static function init(): self
     {
-        return new self(new TariffVO());
+        return new self(new Tariff());
     }
 
     /**
@@ -116,9 +116,9 @@ class TariffVOBuilder
     }
 
     /**
-     * Initializes a new Tariff VO object.
+     * Initializes a new Tariff object.
      */
-    public function build(): TariffVO
+    public function build(): Tariff
     {
         return CoreHelper::clone($this->instance);
     }

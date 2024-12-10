@@ -31,7 +31,7 @@ class OpeningHoursObjectBuilder
     }
 
     /**
-     * Initializes a new opening hours object Builder object.
+     * Initializes a new Opening Hours Object Builder object.
      */
     public static function init(): self
     {
@@ -39,7 +39,9 @@ class OpeningHoursObjectBuilder
     }
 
     /**
-     * Sets week day field.
+     * Sets week Day field.
+     *
+     * @param string|null $value
      */
     public function weekDay(?string $value): self
     {
@@ -48,7 +50,9 @@ class OpeningHoursObjectBuilder
     }
 
     /**
-     * Sets start time field.
+     * Sets start Time field.
+     *
+     * @param string|null $value
      */
     public function startTime(?string $value): self
     {
@@ -57,7 +61,9 @@ class OpeningHoursObjectBuilder
     }
 
     /**
-     * Sets end time field.
+     * Sets end Time field.
+     *
+     * @param string|null $value
      */
     public function endTime(?string $value): self
     {
@@ -66,7 +72,7 @@ class OpeningHoursObjectBuilder
     }
 
     /**
-     * Initializes a new opening hours object object.
+     * Initializes a new Opening Hours Object object.
      */
     public function build(): OpeningHoursObject
     {

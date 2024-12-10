@@ -31,7 +31,7 @@ class ElectricalPropertiesBuilder
     }
 
     /**
-     * Initializes a new electrical properties Builder object.
+     * Initializes a new Electrical Properties Builder object.
      */
     public static function init(): self
     {
@@ -39,7 +39,9 @@ class ElectricalPropertiesBuilder
     }
 
     /**
-     * Sets power type field.
+     * Sets power Type field.
+     *
+     * @param string|null $value
      */
     public function powerType(?string $value): self
     {
@@ -49,6 +51,8 @@ class ElectricalPropertiesBuilder
 
     /**
      * Sets voltage field.
+     *
+     * @param float|null $value
      */
     public function voltage(?float $value): self
     {
@@ -58,6 +62,8 @@ class ElectricalPropertiesBuilder
 
     /**
      * Sets amperage field.
+     *
+     * @param float|null $value
      */
     public function amperage(?float $value): self
     {
@@ -66,7 +72,9 @@ class ElectricalPropertiesBuilder
     }
 
     /**
-     * Sets max electric power field.
+     * Sets max Electric Power field.
+     *
+     * @param float|null $value
      */
     public function maxElectricPower(?float $value): self
     {
@@ -75,7 +83,7 @@ class ElectricalPropertiesBuilder
     }
 
     /**
-     * Initializes a new electrical properties object.
+     * Initializes a new Electrical Properties object.
      */
     public function build(): ElectricalProperties
     {

@@ -14,7 +14,9 @@ use Core\Utils\CoreHelper;
 use ShellEVLib\Models\Accessibility;
 use ShellEVLib\Models\Address;
 use ShellEVLib\Models\Coordinates;
+use ShellEVLib\Models\EvseVO;
 use ShellEVLib\Models\LocationResponeObject;
+use ShellEVLib\Models\OpeningHoursObject;
 
 /**
  * Builder for model LocationResponeObject
@@ -34,7 +36,7 @@ class LocationResponeObjectBuilder
     }
 
     /**
-     * Initializes a new location respone object Builder object.
+     * Initializes a new Location Respone Object Builder object.
      */
     public static function init(): self
     {
@@ -43,6 +45,8 @@ class LocationResponeObjectBuilder
 
     /**
      * Sets uid field.
+     *
+     * @param int|null $value
      */
     public function uid(?int $value): self
     {
@@ -51,7 +55,9 @@ class LocationResponeObjectBuilder
     }
 
     /**
-     * Sets external id field.
+     * Sets external Id field.
+     *
+     * @param string|null $value
      */
     public function externalId(?string $value): self
     {
@@ -61,6 +67,8 @@ class LocationResponeObjectBuilder
 
     /**
      * Sets coordinates field.
+     *
+     * @param Coordinates|null $value
      */
     public function coordinates(?Coordinates $value): self
     {
@@ -69,7 +77,9 @@ class LocationResponeObjectBuilder
     }
 
     /**
-     * Sets operator name field.
+     * Sets operator Name field.
+     *
+     * @param string|null $value
      */
     public function operatorName(?string $value): self
     {
@@ -79,6 +89,8 @@ class LocationResponeObjectBuilder
 
     /**
      * Sets address field.
+     *
+     * @param Address|null $value
      */
     public function address(?Address $value): self
     {
@@ -88,6 +100,8 @@ class LocationResponeObjectBuilder
 
     /**
      * Sets accessibility field.
+     *
+     * @param Accessibility|null $value
      */
     public function accessibility(?Accessibility $value): self
     {
@@ -97,6 +111,8 @@ class LocationResponeObjectBuilder
 
     /**
      * Sets evses field.
+     *
+     * @param EvseVO[]|null $value
      */
     public function evses(?array $value): self
     {
@@ -105,7 +121,9 @@ class LocationResponeObjectBuilder
     }
 
     /**
-     * Sets opening hours field.
+     * Sets opening Hours field.
+     *
+     * @param OpeningHoursObject[]|null $value
      */
     public function openingHours(?array $value): self
     {
@@ -115,6 +133,8 @@ class LocationResponeObjectBuilder
 
     /**
      * Sets updated field.
+     *
+     * @param string|null $value
      */
     public function updated(?string $value): self
     {
@@ -123,7 +143,9 @@ class LocationResponeObjectBuilder
     }
 
     /**
-     * Sets operator comment field.
+     * Sets operator Comment field.
+     *
+     * @param string|null $value
      */
     public function operatorComment(?string $value): self
     {
@@ -132,7 +154,9 @@ class LocationResponeObjectBuilder
     }
 
     /**
-     * Sets location type field.
+     * Sets location Type field.
+     *
+     * @param string|null $value
      */
     public function locationType(?string $value): self
     {
@@ -141,7 +165,7 @@ class LocationResponeObjectBuilder
     }
 
     /**
-     * Initializes a new location respone object object.
+     * Initializes a new Location Respone Object object.
      */
     public function build(): LocationResponeObject
     {

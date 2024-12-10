@@ -32,7 +32,7 @@ class DataRetrieveBuilder
     }
 
     /**
-     * Initializes a new data retrieve Builder object.
+     * Initializes a new Data Retrieve Builder object.
      */
     public static function init(): self
     {
@@ -41,6 +41,8 @@ class DataRetrieveBuilder
 
     /**
      * Sets id field.
+     *
+     * @param string|null $value
      */
     public function id(?string $value): self
     {
@@ -49,7 +51,9 @@ class DataRetrieveBuilder
     }
 
     /**
-     * Sets user id field.
+     * Sets user Id field.
+     *
+     * @param string|null $value
      */
     public function userId(?string $value): self
     {
@@ -58,7 +62,9 @@ class DataRetrieveBuilder
     }
 
     /**
-     * Sets ema id field.
+     * Sets ema Id field.
+     *
+     * @param string|null $value
      */
     public function emaId(?string $value): self
     {
@@ -67,7 +73,9 @@ class DataRetrieveBuilder
     }
 
     /**
-     * Sets evse id field.
+     * Sets evse Id field.
+     *
+     * @param string|null $value
      */
     public function evseId(?string $value): self
     {
@@ -76,7 +84,9 @@ class DataRetrieveBuilder
     }
 
     /**
-     * Sets last updated field.
+     * Sets last Updated field.
+     *
+     * @param string|null $value
      */
     public function lastUpdated(?string $value): self
     {
@@ -85,7 +95,9 @@ class DataRetrieveBuilder
     }
 
     /**
-     * Sets started at field.
+     * Sets started At field.
+     *
+     * @param \DateTime|null $value
      */
     public function startedAt(?\DateTime $value): self
     {
@@ -94,7 +106,9 @@ class DataRetrieveBuilder
     }
 
     /**
-     * Sets stopped at field.
+     * Sets stopped At field.
+     *
+     * @param \DateTime|null $value
      */
     public function stoppedAt(?\DateTime $value): self
     {
@@ -103,7 +117,7 @@ class DataRetrieveBuilder
     }
 
     /**
-     * Unsets stopped at field.
+     * Unsets stopped At field.
      */
     public function unsetStoppedAt(): self
     {
@@ -112,7 +126,9 @@ class DataRetrieveBuilder
     }
 
     /**
-     * Sets session state field.
+     * Sets session State field.
+     *
+     * @param ChargeRetrieveState|null $value
      */
     public function sessionState(?ChargeRetrieveState $value): self
     {
@@ -121,7 +137,7 @@ class DataRetrieveBuilder
     }
 
     /**
-     * Initializes a new data retrieve object.
+     * Initializes a new Data Retrieve object.
      */
     public function build(): DataRetrieve
     {

@@ -14,6 +14,9 @@ use Core\Utils\CoreHelper;
 use Exception;
 use stdClass;
 
+/**
+ * Filter by Locations that have the given status
+ */
 class LocationsMarkersEvseStatusEnum
 {
     public const AVAILABLE = 'Available';

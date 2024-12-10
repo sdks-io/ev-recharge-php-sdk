@@ -32,7 +32,7 @@ class ChargeRetrieveStateBuilder
     }
 
     /**
-     * Initializes a new charge retrieve state Builder object.
+     * Initializes a new Charge Retrieve State Builder object.
      */
     public static function init(): self
     {
@@ -41,6 +41,8 @@ class ChargeRetrieveStateBuilder
 
     /**
      * Sets status field.
+     *
+     * @param string|null $value
      */
     public function status(?string $value): self
     {
@@ -50,6 +52,8 @@ class ChargeRetrieveStateBuilder
 
     /**
      * Sets error field.
+     *
+     * @param ChargeError|null $value
      */
     public function error(?ChargeError $value): self
     {
@@ -58,7 +62,7 @@ class ChargeRetrieveStateBuilder
     }
 
     /**
-     * Initializes a new charge retrieve state object.
+     * Initializes a new Charge Retrieve State object.
      */
     public function build(): ChargeRetrieveState
     {

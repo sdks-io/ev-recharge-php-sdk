@@ -64,7 +64,6 @@ class GetChargeSessionRetrieveResponse200Json implements \JsonSerializable
 
     /**
      * Returns Status.
-     * Indicates overall status of the request
      */
     public function getStatus(): string
     {
@@ -73,7 +72,6 @@ class GetChargeSessionRetrieveResponse200Json implements \JsonSerializable
 
     /**
      * Sets Status.
-     * Indicates overall status of the request
      *
      * @required
      * @maps status

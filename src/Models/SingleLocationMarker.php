@@ -118,8 +118,6 @@ class SingleLocationMarker implements \JsonSerializable
 
     /**
      * Returns Status.
-     * Minimum of all status values in the Marker, e.g. if at least one Evse in the Marker is available,
-     * the value will be available
      */
     public function getStatus(): ?string
     {
@@ -128,8 +126,6 @@ class SingleLocationMarker implements \JsonSerializable
 
     /**
      * Sets Status.
-     * Minimum of all status values in the Marker, e.g. if at least one Evse in the Marker is available,
-     * the value will be available
      *
      * @maps status
      * @factory \ShellEVLib\Models\SingleLocationMarkerStatusEnum::checkValue

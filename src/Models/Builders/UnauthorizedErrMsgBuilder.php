@@ -31,7 +31,7 @@ class UnauthorizedErrMsgBuilder
     }
 
     /**
-     * Initializes a new unauthorized err msg Builder object.
+     * Initializes a new Unauthorized Err Msg Builder object.
      */
     public static function init(): self
     {
@@ -40,6 +40,8 @@ class UnauthorizedErrMsgBuilder
 
     /**
      * Sets code field.
+     *
+     * @param string|null $value
      */
     public function code(?string $value): self
     {
@@ -49,6 +51,8 @@ class UnauthorizedErrMsgBuilder
 
     /**
      * Sets message field.
+     *
+     * @param string|null $value
      */
     public function message(?string $value): self
     {
@@ -58,6 +62,8 @@ class UnauthorizedErrMsgBuilder
 
     /**
      * Sets description field.
+     *
+     * @param string|null $value
      */
     public function description(?string $value): self
     {
@@ -67,6 +73,8 @@ class UnauthorizedErrMsgBuilder
 
     /**
      * Sets details field.
+     *
+     * @param string[]|null $value
      */
     public function details(?array $value): self
     {
@@ -75,7 +83,7 @@ class UnauthorizedErrMsgBuilder
     }
 
     /**
-     * Initializes a new unauthorized err msg object.
+     * Initializes a new Unauthorized Err Msg object.
      */
     public function build(): UnauthorizedErrMsg
     {

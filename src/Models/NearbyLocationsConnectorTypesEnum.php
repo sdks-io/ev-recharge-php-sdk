@@ -14,6 +14,9 @@ use Core\Utils\CoreHelper;
 use Exception;
 use stdClass;
 
+/**
+ * Filter by Locations that have Connectors with these Connector Types
+ */
 class NearbyLocationsConnectorTypesEnum
 {
     public const AVCON = 'Avcon';

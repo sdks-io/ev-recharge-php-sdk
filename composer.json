@@ -23,6 +23,7 @@
         }
     ],
     "support": {},
+    "prefer-stable": false,
     "require": {
         "php": "^7.2 || ^8.0",
         "ext-json": "*",
@@ -52,7 +53,7 @@
         "lint-src-fix": "phpcbf --standard=phpcs-ruleset.xml src/",
         "lint-tests": "phpcs --standard=phpcs-ruleset.xml tests/",
         "lint-tests-fix": "phpcbf --standard=phpcs-ruleset.xml tests/",
-        "analyze": "phan --allow-polyfill-parser",
+        "analyze": "phan --allow-polyfill-parser -p",
         "lint": [
             "@lint-src",
             "@lint-tests"

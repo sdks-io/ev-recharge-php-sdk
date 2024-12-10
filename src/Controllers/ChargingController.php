@@ -46,7 +46,7 @@ class ChargingController extends BaseController
      */
     public function start(string $requestId, ?ChargesessionStartBody $body = null): InlineResponse202
     {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/ev/v1/charge-session/start')
+        $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/charge-session/start')
             ->auth('BearerAuth')
             ->parameters(
                 HeaderParam::init('RequestId', $requestId),
@@ -103,7 +103,7 @@ class ChargingController extends BaseController
      */
     public function stop(string $requestId, string $sessionId): InlineResponse2021
     {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/ev/v1/charge-session/stop')
+        $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/charge-session/stop')
             ->auth('BearerAuth')
             ->parameters(HeaderParam::init('RequestId', $requestId), QueryParam::init('sessionId', $sessionId));
 
@@ -158,7 +158,7 @@ class ChargingController extends BaseController
         string $requestId,
         string $sessionId
     ): GetChargeSessionRetrieveResponse200Json {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/ev/v1/charge-session/retrieve')
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/charge-session/retrieve')
             ->auth('BearerAuth')
             ->parameters(HeaderParam::init('RequestId', $requestId), QueryParam::init('sessionId', $sessionId));
 
@@ -211,7 +211,7 @@ class ChargingController extends BaseController
      */
     public function active(string $requestId, string $emaId): ActiveResponse200Json
     {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/ev/v1/charge-session/active')
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/charge-session/active')
             ->auth('BearerAuth')
             ->parameters(HeaderParam::init('RequestId', $requestId), QueryParam::init('emaId', $emaId));
 

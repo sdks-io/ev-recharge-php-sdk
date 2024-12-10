@@ -32,7 +32,9 @@ class SingleLocationMarkerBuilder
     }
 
     /**
-     * Initializes a new single location marker Builder object.
+     * Initializes a new Single Location Marker Builder object.
+     *
+     * @param string $markerType
      */
     public static function init(string $markerType): self
     {
@@ -40,7 +42,9 @@ class SingleLocationMarkerBuilder
     }
 
     /**
-     * Sets unique key field.
+     * Sets unique Key field.
+     *
+     * @param string|null $value
      */
     public function uniqueKey(?string $value): self
     {
@@ -50,6 +54,8 @@ class SingleLocationMarkerBuilder
 
     /**
      * Sets status field.
+     *
+     * @param string|null $value
      */
     public function status(?string $value): self
     {
@@ -59,6 +65,8 @@ class SingleLocationMarkerBuilder
 
     /**
      * Sets coordinates field.
+     *
+     * @param Coordinates|null $value
      */
     public function coordinates(?Coordinates $value): self
     {
@@ -67,7 +75,9 @@ class SingleLocationMarkerBuilder
     }
 
     /**
-     * Sets evse count field.
+     * Sets evse Count field.
+     *
+     * @param float|null $value
      */
     public function evseCount(?float $value): self
     {
@@ -76,7 +86,9 @@ class SingleLocationMarkerBuilder
     }
 
     /**
-     * Sets max power field.
+     * Sets max Power field.
+     *
+     * @param float|null $value
      */
     public function maxPower(?float $value): self
     {
@@ -85,7 +97,9 @@ class SingleLocationMarkerBuilder
     }
 
     /**
-     * Sets geo hash field.
+     * Sets geo Hash field.
+     *
+     * @param string|null $value
      */
     public function geoHash(?string $value): self
     {
@@ -94,7 +108,9 @@ class SingleLocationMarkerBuilder
     }
 
     /**
-     * Sets location uid field.
+     * Sets location Uid field.
+     *
+     * @param float|null $value
      */
     public function locationUid(?float $value): self
     {
@@ -103,7 +119,9 @@ class SingleLocationMarkerBuilder
     }
 
     /**
-     * Sets authorization methods field.
+     * Sets authorization Methods field.
+     *
+     * @param string[]|null $value
      */
     public function authorizationMethods(?array $value): self
     {
@@ -112,7 +130,9 @@ class SingleLocationMarkerBuilder
     }
 
     /**
-     * Sets operator id field.
+     * Sets operator Id field.
+     *
+     * @param string|null $value
      */
     public function operatorId(?string $value): self
     {
@@ -121,7 +141,7 @@ class SingleLocationMarkerBuilder
     }
 
     /**
-     * Initializes a new single location marker object.
+     * Initializes a new Single Location Marker object.
      */
     public function build(): SingleLocationMarker
     {

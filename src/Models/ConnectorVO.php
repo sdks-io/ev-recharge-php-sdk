@@ -44,7 +44,7 @@ class ConnectorVO implements \JsonSerializable
     private $fixedCable;
 
     /**
-     * @var TariffVO|null
+     * @var Tariff|null
      */
     private $tariff;
 
@@ -105,7 +105,6 @@ class ConnectorVO implements \JsonSerializable
 
     /**
      * Returns Connector Type.
-     * Type of the connector in the EVSE unit.
      */
     public function getConnectorType(): ?string
     {
@@ -114,7 +113,6 @@ class ConnectorVO implements \JsonSerializable
 
     /**
      * Sets Connector Type.
-     * Type of the connector in the EVSE unit.
      *
      * @maps connectorType
      * @factory \ShellEVLib\Models\ConnectorVOConnectorTypeEnum::checkValue
@@ -166,20 +164,18 @@ class ConnectorVO implements \JsonSerializable
 
     /**
      * Returns Tariff.
-     * Tariff details for charging on this Connector
      */
-    public function getTariff(): ?TariffVO
+    public function getTariff(): ?Tariff
     {
         return $this->tariff;
     }
 
     /**
      * Sets Tariff.
-     * Tariff details for charging on this Connector
      *
      * @maps tariff
      */
-    public function setTariff(?TariffVO $tariff): void
+    public function setTariff(?Tariff $tariff): void
     {
         $this->tariff = $tariff;
     }
@@ -206,7 +202,6 @@ class ConnectorVO implements \JsonSerializable
 
     /**
      * Returns Updated By.
-     * Source of the last update
      */
     public function getUpdatedBy(): ?string
     {
@@ -215,7 +210,6 @@ class ConnectorVO implements \JsonSerializable
 
     /**
      * Sets Updated By.
-     * Source of the last update
      *
      * @maps updatedBy
      * @factory \ShellEVLib\Models\ConnectorVOUpdatedByEnum::checkValue

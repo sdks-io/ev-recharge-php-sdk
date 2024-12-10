@@ -31,7 +31,10 @@ class InlineResponse2021Builder
     }
 
     /**
-     * Initializes a new inline response 2021 Builder object.
+     * Initializes a new Inline Response 2021 Builder object.
+     *
+     * @param string $requestId
+     * @param string $status
      */
     public static function init(string $requestId, string $status): self
     {
@@ -39,7 +42,7 @@ class InlineResponse2021Builder
     }
 
     /**
-     * Initializes a new inline response 2021 object.
+     * Initializes a new Inline Response 2021 object.
      */
     public function build(): InlineResponse2021
     {

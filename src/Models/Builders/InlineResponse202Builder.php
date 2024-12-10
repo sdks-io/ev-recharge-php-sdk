@@ -12,6 +12,7 @@ namespace ShellEVLib\Models\Builders;
 
 use Core\Utils\CoreHelper;
 use ShellEVLib\Models\InlineResponse202;
+use ShellEVLib\Models\InlineResponse202Data;
 
 /**
  * Builder for model InlineResponse202
@@ -31,7 +32,11 @@ class InlineResponse202Builder
     }
 
     /**
-     * Initializes a new inline response 202 Builder object.
+     * Initializes a new Inline Response 202 Builder object.
+     *
+     * @param string $requestId
+     * @param string $status
+     * @param InlineResponse202Data[] $data
      */
     public static function init(string $requestId, string $status, array $data): self
     {
@@ -39,7 +44,7 @@ class InlineResponse202Builder
     }
 
     /**
-     * Initializes a new inline response 202 object.
+     * Initializes a new Inline Response 202 object.
      */
     public function build(): InlineResponse202
     {

@@ -59,7 +59,6 @@ class InlineResponse2021 implements \JsonSerializable
 
     /**
      * Returns Status.
-     * Indicates overall status of the request
      */
     public function getStatus(): string
     {
@@ -68,11 +67,10 @@ class InlineResponse2021 implements \JsonSerializable
 
     /**
      * Sets Status.
-     * Indicates overall status of the request
      *
      * @required
      * @maps status
-     * @factory \ShellEVLib\Models\InlineResponse2021StatusEnum::checkValue
+     * @factory \ShellEVLib\Models\GetChargeSessionRetrieveResponse200JsonStatusEnum::checkValue
      */
     public function setStatus(string $status): void
     {
@@ -92,7 +90,7 @@ class InlineResponse2021 implements \JsonSerializable
     {
         $json = [];
         $json['requestId'] = $this->requestId;
-        $json['status']    = InlineResponse2021StatusEnum::checkValue($this->status);
+        $json['status']    = GetChargeSessionRetrieveResponse200JsonStatusEnum::checkValue($this->status);
 
         return (!$asArrayWhenEmpty && empty($json)) ? new stdClass() : $json;
     }

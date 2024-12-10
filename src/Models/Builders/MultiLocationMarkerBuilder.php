@@ -32,7 +32,9 @@ class MultiLocationMarkerBuilder
     }
 
     /**
-     * Initializes a new multi location marker Builder object.
+     * Initializes a new Multi Location Marker Builder object.
+     *
+     * @param string $markerType
      */
     public static function init(string $markerType): self
     {
@@ -40,7 +42,9 @@ class MultiLocationMarkerBuilder
     }
 
     /**
-     * Sets unique key field.
+     * Sets unique Key field.
+     *
+     * @param string|null $value
      */
     public function uniqueKey(?string $value): self
     {
@@ -50,6 +54,8 @@ class MultiLocationMarkerBuilder
 
     /**
      * Sets coordinates field.
+     *
+     * @param Coordinates|null $value
      */
     public function coordinates(?Coordinates $value): self
     {
@@ -58,7 +64,9 @@ class MultiLocationMarkerBuilder
     }
 
     /**
-     * Sets location count field.
+     * Sets location Count field.
+     *
+     * @param float|null $value
      */
     public function locationCount(?float $value): self
     {
@@ -67,7 +75,9 @@ class MultiLocationMarkerBuilder
     }
 
     /**
-     * Sets evse count field.
+     * Sets evse Count field.
+     *
+     * @param float|null $value
      */
     public function evseCount(?float $value): self
     {
@@ -76,7 +86,9 @@ class MultiLocationMarkerBuilder
     }
 
     /**
-     * Sets max power field.
+     * Sets max Power field.
+     *
+     * @param float|null $value
      */
     public function maxPower(?float $value): self
     {
@@ -85,7 +97,9 @@ class MultiLocationMarkerBuilder
     }
 
     /**
-     * Sets geo hash field.
+     * Sets geo Hash field.
+     *
+     * @param string|null $value
      */
     public function geoHash(?string $value): self
     {
@@ -94,7 +108,7 @@ class MultiLocationMarkerBuilder
     }
 
     /**
-     * Initializes a new multi location marker object.
+     * Initializes a new Multi Location Marker object.
      */
     public function build(): MultiLocationMarker
     {

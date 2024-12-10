@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace ShellEVLib\Models\Builders;
 
 use Core\Utils\CoreHelper;
+use ShellEVLib\Models\LocationResponeObject;
 use ShellEVLib\Models\Response;
 
 /**
@@ -31,7 +32,7 @@ class ResponseBuilder
     }
 
     /**
-     * Initializes a new response Builder object.
+     * Initializes a new Response Builder object.
      */
     public static function init(): self
     {
@@ -39,7 +40,9 @@ class ResponseBuilder
     }
 
     /**
-     * Sets request id field.
+     * Sets request Id field.
+     *
+     * @param string|null $value
      */
     public function requestId(?string $value): self
     {
@@ -49,6 +52,8 @@ class ResponseBuilder
 
     /**
      * Sets status field.
+     *
+     * @param string|null $value
      */
     public function status(?string $value): self
     {
@@ -58,6 +63,8 @@ class ResponseBuilder
 
     /**
      * Sets data field.
+     *
+     * @param LocationResponeObject[]|null $value
      */
     public function data(?array $value): self
     {
@@ -66,7 +73,7 @@ class ResponseBuilder
     }
 
     /**
-     * Initializes a new response object.
+     * Initializes a new Response object.
      */
     public function build(): Response
     {
