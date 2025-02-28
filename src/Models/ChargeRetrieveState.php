@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 class ChargeRetrieveState implements \JsonSerializable
@@ -66,6 +67,16 @@ class ChargeRetrieveState implements \JsonSerializable
     public function setError(?ChargeError $error): void
     {
         $this->error = $error;
+    }
+
+    /**
+     * Converts the ChargeRetrieveState object to a human-readable string representation.
+     *
+     * @return string The string representation of the ChargeRetrieveState object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify('ChargeRetrieveState', ['status' => $this->status, 'error' => $this->error]);
     }
 
     /**

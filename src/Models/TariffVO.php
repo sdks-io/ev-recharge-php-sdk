@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 /**
@@ -191,6 +192,27 @@ class TariffVO implements \JsonSerializable
     public function setStructure(?string $structure): void
     {
         $this->structure = $structure;
+    }
+
+    /**
+     * Converts the TariffVO object to a human-readable string representation.
+     *
+     * @return string The string representation of the TariffVO object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'TariffVO',
+            [
+                'startFee' => $this->startFee,
+                'perMinute' => $this->perMinute,
+                'perKWh' => $this->perKWh,
+                'currency' => $this->currency,
+                'updated' => $this->updated,
+                'updatedBy' => $this->updatedBy,
+                'structure' => $this->structure
+            ]
+        );
     }
 
     /**

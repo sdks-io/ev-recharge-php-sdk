@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Exceptions;
 
+use ShellEVLib\ApiHelper;
+
 class UnauthorizedException extends ApiException
 {
     /**
@@ -89,5 +91,19 @@ class UnauthorizedException extends ApiException
     public function setErrors(?array $errors): void
     {
         $this->errors = $errors;
+    }
+
+    /**
+     * Converts the UnauthorizedException object to a human-readable string representation.
+     *
+     * @return string The string representation of the UnauthorizedException object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'UnauthorizedException',
+            ['requestId' => $this->requestId, 'status' => $this->status, 'errors' => $this->errors],
+            parent::__toString()
+        );
     }
 }

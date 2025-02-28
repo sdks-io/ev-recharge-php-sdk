@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 class LocationResponeObject implements \JsonSerializable
@@ -293,6 +294,31 @@ class LocationResponeObject implements \JsonSerializable
     public function setLocationType(?string $locationType): void
     {
         $this->locationType = $locationType;
+    }
+
+    /**
+     * Converts the LocationResponeObject object to a human-readable string representation.
+     *
+     * @return string The string representation of the LocationResponeObject object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'LocationResponeObject',
+            [
+                'uid' => $this->uid,
+                'externalId' => $this->externalId,
+                'coordinates' => $this->coordinates,
+                'operatorName' => $this->operatorName,
+                'address' => $this->address,
+                'accessibility' => $this->accessibility,
+                'evses' => $this->evses,
+                'openingHours' => $this->openingHours,
+                'updated' => $this->updated,
+                'operatorComment' => $this->operatorComment,
+                'locationType' => $this->locationType
+            ]
+        );
     }
 
     /**

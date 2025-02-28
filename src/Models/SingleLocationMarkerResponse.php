@@ -96,6 +96,19 @@ class SingleLocationMarkerResponse implements \JsonSerializable
     }
 
     /**
+     * Converts the SingleLocationMarkerResponse object to a human-readable string representation.
+     *
+     * @return string The string representation of the SingleLocationMarkerResponse object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'SingleLocationMarkerResponse',
+            ['requestId' => $this->requestId, 'status' => $this->status, 'data' => $this->data]
+        );
+    }
+
+    /**
      * Encode this object to JSON
      *
      * @param bool $asArrayWhenEmpty Whether to serialize this model as an array whenever no fields

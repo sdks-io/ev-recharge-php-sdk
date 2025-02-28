@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Exceptions;
 
+use ShellEVLib\ApiHelper;
+
 class TooManyRequestsException extends ApiException
 {
     /**
@@ -91,5 +93,19 @@ class TooManyRequestsException extends ApiException
     public function setErrors(?array $errors): void
     {
         $this->errors = $errors;
+    }
+
+    /**
+     * Converts the TooManyRequestsException object to a human-readable string representation.
+     *
+     * @return string The string representation of the TooManyRequestsException object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'TooManyRequestsException',
+            ['requestId' => $this->requestId, 'status' => $this->status, 'errors' => $this->errors],
+            parent::__toString()
+        );
     }
 }

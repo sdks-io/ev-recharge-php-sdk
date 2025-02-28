@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Exceptions;
 
+use ShellEVLib\ApiHelper;
+
 /**
  * Requested resource path not available it will provides the error in OpenAPI spec mentioned format,
  * if there is any change in base URL then respective platform error message will be populated.
@@ -95,5 +97,19 @@ class NotFoundException extends ApiException
     public function setErrors(?array $errors): void
     {
         $this->errors = $errors;
+    }
+
+    /**
+     * Converts the NotFoundException object to a human-readable string representation.
+     *
+     * @return string The string representation of the NotFoundException object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'NotFoundException',
+            ['requestId' => $this->requestId, 'status' => $this->status, 'errors' => $this->errors],
+            parent::__toString()
+        );
     }
 }

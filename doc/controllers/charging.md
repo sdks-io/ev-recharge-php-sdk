@@ -14,7 +14,7 @@ $chargingController = $client->getChargingController();
 
 * [Start](../../doc/controllers/charging.md#start)
 * [Stop](../../doc/controllers/charging.md#stop)
-* [Get-Charge-Session-Retrieve](../../doc/controllers/charging.md#get-charge-session-retrieve)
+* [Get Charge Session Retrieve](../../doc/controllers/charging.md#get-charge-session-retrieve)
 * [Active](../../doc/controllers/charging.md#active)
 
 
@@ -132,7 +132,7 @@ $result = $chargingController->stop(
 | 503 | Service unavailable | [`ServiceunavailableException`](../../doc/models/serviceunavailable-exception.md) |
 
 
-# Get-Charge-Session-Retrieve
+# Get Charge Session Retrieve
 
 This endpoint returns the details of the session if the session is found.
 

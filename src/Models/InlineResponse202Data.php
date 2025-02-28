@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 class InlineResponse202Data implements \JsonSerializable
@@ -37,6 +38,16 @@ class InlineResponse202Data implements \JsonSerializable
     public function setSessionId(?string $sessionId): void
     {
         $this->sessionId = $sessionId;
+    }
+
+    /**
+     * Converts the InlineResponse202Data object to a human-readable string representation.
+     *
+     * @return string The string representation of the InlineResponse202Data object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify('InlineResponse202Data', ['sessionId' => $this->sessionId]);
     }
 
     /**

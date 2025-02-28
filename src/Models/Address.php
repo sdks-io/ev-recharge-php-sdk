@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 /**
@@ -115,6 +116,24 @@ class Address implements \JsonSerializable
     public function setCountry(?string $country): void
     {
         $this->country = $country;
+    }
+
+    /**
+     * Converts the Address object to a human-readable string representation.
+     *
+     * @return string The string representation of the Address object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'Address',
+            [
+                'streetAndNumber' => $this->streetAndNumber,
+                'postalCode' => $this->postalCode,
+                'city' => $this->city,
+                'country' => $this->country
+            ]
+        );
     }
 
     /**

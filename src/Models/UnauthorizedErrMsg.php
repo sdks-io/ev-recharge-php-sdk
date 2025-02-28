@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 class UnauthorizedErrMsg implements \JsonSerializable
@@ -116,6 +117,24 @@ class UnauthorizedErrMsg implements \JsonSerializable
     public function setDetails(?array $details): void
     {
         $this->details = $details;
+    }
+
+    /**
+     * Converts the UnauthorizedErrMsg object to a human-readable string representation.
+     *
+     * @return string The string representation of the UnauthorizedErrMsg object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'UnauthorizedErrMsg',
+            [
+                'code' => $this->code,
+                'message' => $this->message,
+                'description' => $this->description,
+                'details' => $this->details
+            ]
+        );
     }
 
     /**

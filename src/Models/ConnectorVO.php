@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 /**
@@ -237,6 +238,29 @@ class ConnectorVO implements \JsonSerializable
     public function setDeleted(?string $deleted): void
     {
         $this->deleted = $deleted;
+    }
+
+    /**
+     * Converts the ConnectorVO object to a human-readable string representation.
+     *
+     * @return string The string representation of the ConnectorVO object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'ConnectorVO',
+            [
+                'uid' => $this->uid,
+                'externalId' => $this->externalId,
+                'connectorType' => $this->connectorType,
+                'electricalProperties' => $this->electricalProperties,
+                'fixedCable' => $this->fixedCable,
+                'tariff' => $this->tariff,
+                'updated' => $this->updated,
+                'updatedBy' => $this->updatedBy,
+                'deleted' => $this->deleted
+            ]
+        );
     }
 
     /**

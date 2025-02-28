@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 /**
@@ -199,6 +200,27 @@ class MultiLocationMarker implements \JsonSerializable
     public function setGeoHash(?string $geoHash): void
     {
         $this->geoHash = $geoHash;
+    }
+
+    /**
+     * Converts the MultiLocationMarker object to a human-readable string representation.
+     *
+     * @return string The string representation of the MultiLocationMarker object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'MultiLocationMarker',
+            [
+                'markerType' => $this->markerType,
+                'uniqueKey' => $this->uniqueKey,
+                'coordinates' => $this->coordinates,
+                'locationCount' => $this->locationCount,
+                'evseCount' => $this->evseCount,
+                'maxPower' => $this->maxPower,
+                'geoHash' => $this->geoHash
+            ]
+        );
     }
 
     /**

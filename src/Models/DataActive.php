@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use ShellEVLib\Utils\DateTimeHelper;
 use stdClass;
 
@@ -223,6 +224,28 @@ class DataActive implements \JsonSerializable
     public function setLastUpdated(?string $lastUpdated): void
     {
         $this->lastUpdated = $lastUpdated;
+    }
+
+    /**
+     * Converts the DataActive object to a human-readable string representation.
+     *
+     * @return string The string representation of the DataActive object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'DataActive',
+            [
+                'id' => $this->id,
+                'userId' => $this->userId,
+                'emaId' => $this->emaId,
+                'evseId' => $this->evseId,
+                'startedAt' => $this->startedAt,
+                'stoppedAt' => $this->getStoppedAt(),
+                'sessionState' => $this->sessionState,
+                'lastUpdated' => $this->lastUpdated
+            ]
+        );
     }
 
     /**

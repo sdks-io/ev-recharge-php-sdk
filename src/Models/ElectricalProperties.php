@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 /**
@@ -114,6 +115,24 @@ class ElectricalProperties implements \JsonSerializable
     public function setMaxElectricPower(?float $maxElectricPower): void
     {
         $this->maxElectricPower = $maxElectricPower;
+    }
+
+    /**
+     * Converts the ElectricalProperties object to a human-readable string representation.
+     *
+     * @return string The string representation of the ElectricalProperties object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'ElectricalProperties',
+            [
+                'powerType' => $this->powerType,
+                'voltage' => $this->voltage,
+                'amperage' => $this->amperage,
+                'maxElectricPower' => $this->maxElectricPower
+            ]
+        );
     }
 
     /**

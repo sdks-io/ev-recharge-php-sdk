@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 class OpeningHoursObject implements \JsonSerializable
@@ -86,6 +87,19 @@ class OpeningHoursObject implements \JsonSerializable
     public function setEndTime(?string $endTime): void
     {
         $this->endTime = $endTime;
+    }
+
+    /**
+     * Converts the OpeningHoursObject object to a human-readable string representation.
+     *
+     * @return string The string representation of the OpeningHoursObject object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'OpeningHoursObject',
+            ['weekDay' => $this->weekDay, 'startTime' => $this->startTime, 'endTime' => $this->endTime]
+        );
     }
 
     /**

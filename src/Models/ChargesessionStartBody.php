@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 class ChargesessionStartBody implements \JsonSerializable
@@ -74,6 +75,19 @@ class ChargesessionStartBody implements \JsonSerializable
     public function setEvseId(string $evseId): void
     {
         $this->evseId = $evseId;
+    }
+
+    /**
+     * Converts the ChargesessionStartBody object to a human-readable string representation.
+     *
+     * @return string The string representation of the ChargesessionStartBody object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'ChargesessionStartBody',
+            ['evChargeNumber' => $this->evChargeNumber, 'evseId' => $this->evseId]
+        );
     }
 
     /**

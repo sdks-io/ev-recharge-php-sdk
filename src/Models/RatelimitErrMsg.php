@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 class RatelimitErrMsg implements \JsonSerializable
@@ -116,6 +117,24 @@ class RatelimitErrMsg implements \JsonSerializable
     public function setDetails(?array $details): void
     {
         $this->details = $details;
+    }
+
+    /**
+     * Converts the RatelimitErrMsg object to a human-readable string representation.
+     *
+     * @return string The string representation of the RatelimitErrMsg object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'RatelimitErrMsg',
+            [
+                'code' => $this->code,
+                'message' => $this->message,
+                'description' => $this->description,
+                'details' => $this->details
+            ]
+        );
     }
 
     /**

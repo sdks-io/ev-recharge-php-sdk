@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 class NotFoundErrMsg implements \JsonSerializable
@@ -116,6 +117,24 @@ class NotFoundErrMsg implements \JsonSerializable
     public function setDetails(?array $details): void
     {
         $this->details = $details;
+    }
+
+    /**
+     * Converts the NotFoundErrMsg object to a human-readable string representation.
+     *
+     * @return string The string representation of the NotFoundErrMsg object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'NotFoundErrMsg',
+            [
+                'code' => $this->code,
+                'message' => $this->message,
+                'description' => $this->description,
+                'details' => $this->details
+            ]
+        );
     }
 
     /**

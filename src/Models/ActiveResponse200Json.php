@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 class ActiveResponse200Json implements \JsonSerializable
@@ -102,6 +103,19 @@ class ActiveResponse200Json implements \JsonSerializable
     public function setData(?array $data): void
     {
         $this->data = $data;
+    }
+
+    /**
+     * Converts the ActiveResponse200Json object to a human-readable string representation.
+     *
+     * @return string The string representation of the ActiveResponse200Json object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'ActiveResponse200Json',
+            ['requestId' => $this->requestId, 'status' => $this->status, 'data' => $this->data]
+        );
     }
 
     /**

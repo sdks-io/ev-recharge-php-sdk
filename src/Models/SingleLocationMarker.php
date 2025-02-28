@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 /**
@@ -278,6 +279,30 @@ class SingleLocationMarker implements \JsonSerializable
     public function setOperatorId(?string $operatorId): void
     {
         $this->operatorId = $operatorId;
+    }
+
+    /**
+     * Converts the SingleLocationMarker object to a human-readable string representation.
+     *
+     * @return string The string representation of the SingleLocationMarker object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'SingleLocationMarker',
+            [
+                'markerType' => $this->markerType,
+                'uniqueKey' => $this->uniqueKey,
+                'status' => $this->status,
+                'coordinates' => $this->coordinates,
+                'evseCount' => $this->evseCount,
+                'maxPower' => $this->maxPower,
+                'geoHash' => $this->geoHash,
+                'locationUid' => $this->locationUid,
+                'authorizationMethods' => $this->authorizationMethods,
+                'operatorId' => $this->operatorId
+            ]
+        );
     }
 
     /**

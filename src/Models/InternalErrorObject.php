@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 class InternalErrorObject implements \JsonSerializable
@@ -89,6 +90,19 @@ class InternalErrorObject implements \JsonSerializable
     public function setDescription(?string $description): void
     {
         $this->description = $description;
+    }
+
+    /**
+     * Converts the InternalErrorObject object to a human-readable string representation.
+     *
+     * @return string The string representation of the InternalErrorObject object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'InternalErrorObject',
+            ['code' => $this->code, 'message' => $this->message, 'description' => $this->description]
+        );
     }
 
     /**

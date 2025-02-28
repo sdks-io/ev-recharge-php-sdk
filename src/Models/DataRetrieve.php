@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use ShellEVLib\Utils\DateTimeHelper;
 use stdClass;
 
@@ -225,6 +226,28 @@ class DataRetrieve implements \JsonSerializable
     public function setSessionState(?ChargeRetrieveState $sessionState): void
     {
         $this->sessionState = $sessionState;
+    }
+
+    /**
+     * Converts the DataRetrieve object to a human-readable string representation.
+     *
+     * @return string The string representation of the DataRetrieve object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'DataRetrieve',
+            [
+                'id' => $this->id,
+                'userId' => $this->userId,
+                'emaId' => $this->emaId,
+                'evseId' => $this->evseId,
+                'lastUpdated' => $this->lastUpdated,
+                'startedAt' => $this->startedAt,
+                'stoppedAt' => $this->getStoppedAt(),
+                'sessionState' => $this->sessionState
+            ]
+        );
     }
 
     /**

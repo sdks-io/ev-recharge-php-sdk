@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 /**
@@ -66,6 +67,16 @@ class Accessibility implements \JsonSerializable
     public function setRemark(?string $remark): void
     {
         $this->remark = $remark;
+    }
+
+    /**
+     * Converts the Accessibility object to a human-readable string representation.
+     *
+     * @return string The string representation of the Accessibility object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify('Accessibility', ['status' => $this->status, 'remark' => $this->remark]);
     }
 
     /**

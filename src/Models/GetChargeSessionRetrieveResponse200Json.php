@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 class GetChargeSessionRetrieveResponse200Json implements \JsonSerializable
@@ -102,6 +103,20 @@ class GetChargeSessionRetrieveResponse200Json implements \JsonSerializable
     public function setData(?array $data): void
     {
         $this->data = $data;
+    }
+
+    /**
+     * Converts the GetChargeSessionRetrieveResponse200Json object to a human-readable string
+     * representation.
+     *
+     * @return string The string representation of the GetChargeSessionRetrieveResponse200Json object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'GetChargeSessionRetrieveResponse200Json',
+            ['requestId' => $this->requestId, 'status' => $this->status, 'data' => $this->data]
+        );
     }
 
     /**

@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 /**
@@ -247,6 +248,29 @@ class EvseVO implements \JsonSerializable
     public function setPhysicalReference(?string $physicalReference): void
     {
         $this->physicalReference = $physicalReference;
+    }
+
+    /**
+     * Converts the EvseVO object to a human-readable string representation.
+     *
+     * @return string The string representation of the EvseVO object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'EvseVO',
+            [
+                'uid' => $this->uid,
+                'externalId' => $this->externalId,
+                'evseId' => $this->evseId,
+                'status' => $this->status,
+                'connectors' => $this->connectors,
+                'authorizationMethods' => $this->authorizationMethods,
+                'updated' => $this->updated,
+                'deleted' => $this->deleted,
+                'physicalReference' => $this->physicalReference
+            ]
+        );
     }
 
     /**

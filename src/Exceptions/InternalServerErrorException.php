@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Exceptions;
 
+use ShellEVLib\ApiHelper;
+
 class InternalServerErrorException extends ApiException
 {
     /**
@@ -118,5 +120,24 @@ class InternalServerErrorException extends ApiException
     public function setDetails(?array $details): void
     {
         $this->details = $details;
+    }
+
+    /**
+     * Converts the InternalServerErrorException object to a human-readable string representation.
+     *
+     * @return string The string representation of the InternalServerErrorException object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'InternalServerErrorException',
+            [
+                'requestId' => $this->requestId,
+                'status' => $this->status,
+                'errors' => $this->errors,
+                'details' => $this->details
+            ],
+            parent::__toString()
+        );
     }
 }

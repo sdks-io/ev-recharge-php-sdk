@@ -37,7 +37,7 @@ class OAuthAuthorizationController extends BaseController
     public function requestToken(
         string $authorization,
         ?string $scope = null,
-        array $fieldParameters = null
+        ?array $fieldParameters = null
     ): OAuthToken {
         $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/token')
             ->server(Server::ACCESS_TOKEN_SERVER)

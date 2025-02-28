@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 class ChargeError implements \JsonSerializable
@@ -62,6 +63,16 @@ class ChargeError implements \JsonSerializable
     public function setMessage(?string $message): void
     {
         $this->message = $message;
+    }
+
+    /**
+     * Converts the ChargeError object to a human-readable string representation.
+     *
+     * @return string The string representation of the ChargeError object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify('ChargeError', ['code' => $this->code, 'message' => $this->message]);
     }
 
     /**

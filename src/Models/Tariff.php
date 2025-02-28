@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 class Tariff implements \JsonSerializable
@@ -188,6 +189,27 @@ class Tariff implements \JsonSerializable
     public function setStructure(?string $structure): void
     {
         $this->structure = $structure;
+    }
+
+    /**
+     * Converts the Tariff object to a human-readable string representation.
+     *
+     * @return string The string representation of the Tariff object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'Tariff',
+            [
+                'startFee' => $this->startFee,
+                'perMinute' => $this->perMinute,
+                'perKWh' => $this->perKWh,
+                'currency' => $this->currency,
+                'updated' => $this->updated,
+                'updatedBy' => $this->updatedBy,
+                'structure' => $this->structure
+            ]
+        );
     }
 
     /**

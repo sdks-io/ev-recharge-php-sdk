@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 class InlineResponse2021 implements \JsonSerializable
@@ -75,6 +76,19 @@ class InlineResponse2021 implements \JsonSerializable
     public function setStatus(string $status): void
     {
         $this->status = $status;
+    }
+
+    /**
+     * Converts the InlineResponse2021 object to a human-readable string representation.
+     *
+     * @return string The string representation of the InlineResponse2021 object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'InlineResponse2021',
+            ['requestId' => $this->requestId, 'status' => $this->status]
+        );
     }
 
     /**

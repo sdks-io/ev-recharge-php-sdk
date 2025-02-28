@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 class ServiceunavailableErrMsg implements \JsonSerializable
@@ -116,6 +117,24 @@ class ServiceunavailableErrMsg implements \JsonSerializable
     public function setDetails(?array $details): void
     {
         $this->details = $details;
+    }
+
+    /**
+     * Converts the ServiceunavailableErrMsg object to a human-readable string representation.
+     *
+     * @return string The string representation of the ServiceunavailableErrMsg object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'ServiceunavailableErrMsg',
+            [
+                'code' => $this->code,
+                'message' => $this->message,
+                'description' => $this->description,
+                'details' => $this->details
+            ]
+        );
     }
 
     /**

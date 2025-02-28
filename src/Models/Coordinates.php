@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Models;
 
+use ShellEVLib\ApiHelper;
 use stdClass;
 
 /**
@@ -65,6 +66,19 @@ class Coordinates implements \JsonSerializable
     public function setLongitude(?float $longitude): void
     {
         $this->longitude = $longitude;
+    }
+
+    /**
+     * Converts the Coordinates object to a human-readable string representation.
+     *
+     * @return string The string representation of the Coordinates object.
+     */
+    public function __toString(): string
+    {
+        return ApiHelper::stringify(
+            'Coordinates',
+            ['latitude' => $this->latitude, 'longitude' => $this->longitude]
+        );
     }
 
     /**
