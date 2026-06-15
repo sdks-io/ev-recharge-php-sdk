@@ -18,7 +18,6 @@ use CoreInterfaces\Core\Request\RequestMethod;
 use ShellEVLib\Exceptions\ApiException;
 use ShellEVLib\Exceptions\OAuthProviderException;
 use ShellEVLib\Models\OAuthToken;
-use ShellEVLib\Server;
 
 class OAuthAuthorizationController extends BaseController
 {
@@ -40,7 +39,6 @@ class OAuthAuthorizationController extends BaseController
         ?array $fieldParameters = null
     ): OAuthToken {
         $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/token')
-            ->server(Server::ACCESS_TOKEN_SERVER)
             ->parameters(
                 FormParam::init('grant_type', 'client_credentials'),
                 HeaderParam::init('Authorization', $authorization),

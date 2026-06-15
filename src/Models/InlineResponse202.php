@@ -67,6 +67,7 @@ class InlineResponse202 implements \JsonSerializable
 
     /**
      * Returns Status.
+     * Indicates overall status of the request
      */
     public function getStatus(): string
     {
@@ -75,6 +76,7 @@ class InlineResponse202 implements \JsonSerializable
 
     /**
      * Sets Status.
+     * Indicates overall status of the request
      *
      * @required
      * @maps status

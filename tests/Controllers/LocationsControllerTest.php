@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace ShellEVLib\Tests\Controllers;
 
-use Core\TestCase\TestParam;
 use ShellEVLib\Controllers\LocationsController;
 use ShellEVLib\Exceptions;
 
@@ -48,8 +47,8 @@ class LocationsControllerTest extends BaseTestController
         $pageNumber = null;
         $perPage = null;
         $updatedSince = null;
-        $country = TestParam::object('["NED"]');
-        $excludeCountry = TestParam::object('["NED"]');
+        $country = null;
+        $excludeCountry = null;
 
         // Perform API call
         $result = null;

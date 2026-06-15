@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace ShellEVLib\Models\Builders;
 
 use Core\Utils\CoreHelper;
-use ShellEVLib\Models\Coordinates;
+use ShellEVLib\Models\Coordinates1;
 use ShellEVLib\Models\MultiLocationMarker;
 
 /**
@@ -55,9 +55,9 @@ class MultiLocationMarkerBuilder
     /**
      * Sets coordinates field.
      *
-     * @param Coordinates|null $value
+     * @param Coordinates1|null $value
      */
-    public function coordinates(?Coordinates $value): self
+    public function coordinates(?Coordinates1 $value): self
     {
         $this->instance->setCoordinates($value);
         return $this;

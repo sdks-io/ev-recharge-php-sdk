@@ -29,7 +29,7 @@ class MultiLocationMarker implements \JsonSerializable
     private $uniqueKey;
 
     /**
-     * @var Coordinates|null
+     * @var Coordinates1|null
      */
     private $coordinates;
 
@@ -104,20 +104,18 @@ class MultiLocationMarker implements \JsonSerializable
 
     /**
      * Returns Coordinates.
-     * Coordinates of the Shell Recharge Site Location
      */
-    public function getCoordinates(): ?Coordinates
+    public function getCoordinates(): ?Coordinates1
     {
         return $this->coordinates;
     }
 
     /**
      * Sets Coordinates.
-     * Coordinates of the Shell Recharge Site Location
      *
      * @maps coordinates
      */
-    public function setCoordinates(?Coordinates $coordinates): void
+    public function setCoordinates(?Coordinates1 $coordinates): void
     {
         $this->coordinates = $coordinates;
     }

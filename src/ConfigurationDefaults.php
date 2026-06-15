@@ -41,6 +41,13 @@ class ConfigurationDefaults
 
     public const O_AUTH_TOKEN = null;
 
+    public const PROXY_CONFIGURATION = [
+        'port' => 0,
+        'tunnel' => false,
+        'address' => '',
+        'auth' => ['user' => '', 'pass' => '', 'method' => CURLAUTH_BASIC]
+    ];
+
     public const BEARER_AUTH_CLOCK_SKEW = 0;
 
     /**
@@ -62,6 +69,7 @@ class ConfigurationDefaults
         'oAuthToken' => self::O_AUTH_TOKEN,
         'BearerAuth-ClockSkew' => self::BEARER_AUTH_CLOCK_SKEW,
         'BearerAuth-TokenProvider' => null,
-        'BearerAuth-OnTokenUpdate' => null
+        'BearerAuth-OnTokenUpdate' => null,
+        'proxyConfiguration' => self::PROXY_CONFIGURATION
     ];
 }

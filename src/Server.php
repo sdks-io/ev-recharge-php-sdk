@@ -16,6 +16,4 @@ namespace ShellEVLib;
 class Server
 {
     public const DEFAULT_ = 'default';
-
-    public const ACCESS_TOKEN_SERVER = 'access token server';
 }

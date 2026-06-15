@@ -86,7 +86,7 @@ class SingleLocationMarkerResponse implements \JsonSerializable
      * Sets Data.
      *
      * @maps data
-     * @mapsBy anyOf(oneOf{markerType}(SingleLocationMarker{singleLocation},MultiLocationMarker{multiLocation})[],null)
+     * @mapsBy anyOf(oneOf{markerType2}(SingleLocationMarker{singleLocation2},MultiLocationMarker{multiLocation2})[],null)
      *
      * @param array<SingleLocationMarker|MultiLocationMarker>|null $data
      */
@@ -130,8 +130,8 @@ class SingleLocationMarkerResponse implements \JsonSerializable
             $json['data']      =
                 ApiHelper::getJsonHelper()->verifyTypes(
                     $this->data,
-                    'anyOf(oneOf{markerType}(SingleLocationMarker{singleLocation},MultiLocationMarker' .
-                    '{multiLocation})[],null)'
+                    'anyOf(oneOf{markerType2}(SingleLocationMarker{singleLocation2},MultiLocationMark' .
+                    'er{multiLocation2})[],null)'
                 );
         }
 

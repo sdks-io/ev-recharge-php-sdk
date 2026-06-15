@@ -22,21 +22,21 @@ use ShellEVLib\Exceptions\NotFoundException;
 use ShellEVLib\Exceptions\ServiceunavailableException;
 use ShellEVLib\Exceptions\TooManyRequestsException;
 use ShellEVLib\Exceptions\UnauthorizedException;
-use ShellEVLib\Models\GetEVLocationsAuthorizationMethodsEnum;
-use ShellEVLib\Models\GetEVLocationsConnectorTypesEnum;
-use ShellEVLib\Models\GetEVLocationsEvseStatusEnum;
-use ShellEVLib\Models\NearbyLocationsConnectorTypesEnum;
-use ShellEVLib\Models\Response;
-use ShellEVLib\Models\SingleLocationMarkerResponse;
+use ShellEVLib\Models\ConnectorTypesEnum;
+use ShellEVLib\Models\EvseStatusEnum;
+use ShellEVLib\Models\ResponseV2;
+use ShellEVLib\Models\SearchByIdResponse;
+use ShellEVLib\Models\SingleLocationMarkerAuthorizationMethodsItemsEnum;
+use ShellEVLib\Models\SingleLocationMarkerResponseV2;
 
 class LocationsController extends BaseController
 {
     /**
-     * This API provides the list of all Shell Recharge locations. The list includes all Shell Recharge
-     * network and all locations available through our roaming partners. The end point provides flexible
-     * search criteria in order to get the list of Shell Recharge Network. The end point provides the
-     * details such as the exact location/address of the site along with the up-to-date status information
-     * of all the charging units in the site.
+     * This API Product provides the list of all public Shell Recharge locations. The list includes Shell
+     * Recharge network and locations available publicly through our roaming partners. The end point
+     * provides flexible search criteria in order to get the list of Shell Recharge Network. The end point
+     * provides the details such as the exact location/address of the site along with the up-to-date status
+     * information of all the charging units in the site.
      *
      * Supported Search Options
      *
@@ -73,7 +73,7 @@ class LocationsController extends BaseController
      * @param string[]|null $excludeCountry Filter by Locations that are not in one of the given
      *        countries (specified using ISO 3166-1 alpha-3 codes)
      *
-     * @return Response Response from the API call
+     * @return ResponseV2 Response from the API call
      *
      * @throws ApiException Thrown if API call fails
      */
@@ -92,18 +92,17 @@ class LocationsController extends BaseController
         ?string $updatedSince = null,
         ?array $country = null,
         ?array $excludeCountry = null
-    ): Response {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/locations')
+    ): ResponseV2 {
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/v2/locations')
             ->auth('BearerAuth')
             ->parameters(
                 HeaderParam::init('RequestId', $requestId),
-                QueryParam::init('evseStatus', $evseStatus)
-                    ->serializeBy([GetEVLocationsEvseStatusEnum::class, 'checkValue']),
+                QueryParam::init('evseStatus', $evseStatus)->serializeBy([EvseStatusEnum::class, 'checkValue']),
                 QueryParam::init('connectorTypes', $connectorTypes)
-                    ->serializeBy([GetEVLocationsConnectorTypesEnum::class, 'checkValue']),
+                    ->serializeBy([ConnectorTypesEnum::class, 'checkValue']),
                 QueryParam::init('connectorMinPower', $connectorMinPower),
                 QueryParam::init('authorizationMethods', $authorizationMethods)
-                    ->serializeBy([GetEVLocationsAuthorizationMethodsEnum::class, 'checkValue']),
+                    ->serializeBy([SingleLocationMarkerAuthorizationMethodsItemsEnum::class, 'checkValue']),
                 QueryParam::init('withOperatorName', $withOperatorName),
                 QueryParam::init('evseId', $evseId),
                 QueryParam::init('locationExternalId', $locationExternalId),
@@ -143,7 +142,7 @@ class LocationsController extends BaseController
             )
             ->throwErrorOn('500', ErrorType::init('Internal Server error', InternalServerErrorException::class))
             ->throwErrorOn('503', ErrorType::init('Service unavailable', ServiceunavailableException::class))
-            ->type(Response::class);
+            ->type(ResponseV2::class);
 
         return $this->execute($_reqBuilder, $_resHandler);
     }
@@ -159,10 +158,11 @@ class LocationsController extends BaseController
      *        digits, displayed in five groups separated by hyphens, in the form 8-4-4-4-12 for a
      *        total of 36 characters (32 hexadecimal characters and 4 hyphens) <br>
      * @param string $id Unique Uid of the location from List of locations API
-     * @param string|null $providerId The provider id that you wish to see locations and tariffs for
+     * @param string|null $providerId ProviderId is mandatory in order to get the tariff information
+     *        as part of API response.
      * @param string|null $since to get the locations modified after a date
      *
-     * @return Response Response from the API call
+     * @return SearchByIdResponse Response from the API call
      *
      * @throws ApiException Thrown if API call fails
      */
@@ -171,8 +171,8 @@ class LocationsController extends BaseController
         string $id,
         ?string $providerId = null,
         ?string $since = null
-    ): Response {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/locations/{id}')
+    ): SearchByIdResponse {
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/v2/locations/{id}')
             ->auth('BearerAuth')
             ->parameters(
                 HeaderParam::init('RequestId', $requestId),
@@ -209,7 +209,7 @@ class LocationsController extends BaseController
             )
             ->throwErrorOn('500', ErrorType::init('Internal Server error', InternalServerErrorException::class))
             ->throwErrorOn('503', ErrorType::init('Service unavailable', ServiceunavailableException::class))
-            ->type(Response::class);
+            ->type(SearchByIdResponse::class);
 
         return $this->execute($_reqBuilder, $_resHandler);
     }
@@ -259,7 +259,7 @@ class LocationsController extends BaseController
      * @param string[]|null $excludeCountry Filter by Locations that are not in one of the given
      *        countries (specified using ISO 3166-1 alpha-3 codes)
      *
-     * @return Response Response from the API call
+     * @return ResponseV2 Response from the API call
      *
      * @throws ApiException Thrown if API call fails
      */
@@ -280,8 +280,8 @@ class LocationsController extends BaseController
         ?bool $withMaxPower = null,
         ?array $country = null,
         ?array $excludeCountry = null
-    ): Response {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/locations/nearby')
+    ): ResponseV2 {
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/v2/locations/nearby')
             ->auth('BearerAuth')
             ->parameters(
                 HeaderParam::init('RequestId', $requestId),
@@ -292,13 +292,12 @@ class LocationsController extends BaseController
                 QueryParam::init('evseId', $evseId),
                 QueryParam::init('evseExternalId', $evseExternalId),
                 QueryParam::init('operatorName', $operatorName),
-                QueryParam::init('evseStatus', $evseStatus)
-                    ->serializeBy([GetEVLocationsEvseStatusEnum::class, 'checkValue']),
+                QueryParam::init('evseStatus', $evseStatus)->serializeBy([EvseStatusEnum::class, 'checkValue']),
                 QueryParam::init('connectorTypes', $connectorTypes)
-                    ->serializeBy([NearbyLocationsConnectorTypesEnum::class, 'checkValue']),
+                    ->serializeBy([ConnectorTypesEnum::class, 'checkValue']),
                 QueryParam::init('connectorMinPower', $connectorMinPower),
                 QueryParam::init('authorizationMethods', $authorizationMethods)
-                    ->serializeBy([GetEVLocationsAuthorizationMethodsEnum::class, 'checkValue']),
+                    ->serializeBy([SingleLocationMarkerAuthorizationMethodsItemsEnum::class, 'checkValue']),
                 QueryParam::init('withOperatorName', $withOperatorName),
                 QueryParam::init('withMaxPower', $withMaxPower),
                 QueryParam::init('country', $country),
@@ -333,7 +332,7 @@ class LocationsController extends BaseController
             )
             ->throwErrorOn('500', ErrorType::init('Internal Server error', InternalServerErrorException::class))
             ->throwErrorOn('503', ErrorType::init('Service unavailable', ServiceunavailableException::class))
-            ->type(Response::class);
+            ->type(ResponseV2::class);
 
         return $this->execute($_reqBuilder, $_resHandler);
     }
@@ -383,7 +382,7 @@ class LocationsController extends BaseController
      * @param string[]|null $excludeCountry Filter by Locations that are not in one of the given
      *        countries (specified using ISO 3166-1 alpha-3 codes)
      *
-     * @return SingleLocationMarkerResponse Response from the API call
+     * @return SingleLocationMarkerResponseV2 Response from the API call
      *
      * @throws ApiException Thrown if API call fails
      */
@@ -406,8 +405,8 @@ class LocationsController extends BaseController
         ?string $operatorName = null,
         ?array $country = null,
         ?array $excludeCountry = null
-    ): SingleLocationMarkerResponse {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/locations/markers')
+    ): SingleLocationMarkerResponseV2 {
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/v2/locations/markers')
             ->auth('BearerAuth')
             ->parameters(
                 HeaderParam::init('RequestId', $requestId),
@@ -416,13 +415,12 @@ class LocationsController extends BaseController
                 QueryParam::init('east', $east),
                 QueryParam::init('north', $north),
                 QueryParam::init('zoom', $zoom),
-                QueryParam::init('evseStatus', $evseStatus)
-                    ->serializeBy([GetEVLocationsEvseStatusEnum::class, 'checkValue']),
+                QueryParam::init('evseStatus', $evseStatus)->serializeBy([EvseStatusEnum::class, 'checkValue']),
                 QueryParam::init('connectorTypes', $connectorTypes)
-                    ->serializeBy([GetEVLocationsConnectorTypesEnum::class, 'checkValue']),
+                    ->serializeBy([ConnectorTypesEnum::class, 'checkValue']),
                 QueryParam::init('connectorMinPower', $connectorMinPower),
                 QueryParam::init('authorizationMethods', $authorizationMethods)
-                    ->serializeBy([GetEVLocationsAuthorizationMethodsEnum::class, 'checkValue']),
+                    ->serializeBy([SingleLocationMarkerAuthorizationMethodsItemsEnum::class, 'checkValue']),
                 QueryParam::init('withOperatorName', $withOperatorName),
                 QueryParam::init('withMaxPower', $withMaxPower),
                 QueryParam::init('locationExternalId', $locationExternalId),
@@ -461,7 +459,7 @@ class LocationsController extends BaseController
             )
             ->throwErrorOn('500', ErrorType::init('Internal server error', InternalServerErrorException::class))
             ->throwErrorOn('503', ErrorType::init('Service unavailable', ServiceunavailableException::class))
-            ->type(SingleLocationMarkerResponse::class);
+            ->type(SingleLocationMarkerResponseV2::class);
 
         return $this->execute($_reqBuilder, $_resHandler);
     }

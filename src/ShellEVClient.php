@@ -17,6 +17,7 @@ use ShellEVLib\Authentication\ClientCredentialsAuthManager;
 use ShellEVLib\Controllers\ChargingController;
 use ShellEVLib\Controllers\LocationsController;
 use ShellEVLib\Controllers\OAuthAuthorizationController;
+use ShellEVLib\Proxy\ProxyConfigurationBuilder;
 use ShellEVLib\Utils\CompatibilityConverter;
 use Unirest\Configuration;
 use Unirest\HttpClient;
@@ -30,6 +31,8 @@ class ShellEVClient implements ConfigurationInterface
     private $oAuthAuthorization;
 
     private $clientCredentialsAuthManager;
+
+    private $proxyConfiguration;
 
     private $config;
 
@@ -45,7 +48,10 @@ class ShellEVClient implements ConfigurationInterface
     {
         $this->config = array_merge(ConfigurationDefaults::_ALL, CoreHelper::clone($config));
         $this->clientCredentialsAuthManager = new ClientCredentialsAuthManager($this->config);
-        $this->client = ClientBuilder::init(new HttpClient(Configuration::init($this)))
+        $this->proxyConfiguration = $this->config['proxyConfiguration'] ?? ConfigurationDefaults::PROXY_CONFIGURATION;
+        $this->client = ClientBuilder::init(
+            new HttpClient(Configuration::init($this)->proxyConfiguration($this->proxyConfiguration))
+        )
             ->converter(new CompatibilityConverter())
             ->jsonHelper(ApiHelper::getJsonHelper())
             ->apiCallback($this->config['httpCallback'] ?? null)
@@ -74,7 +80,8 @@ class ShellEVClient implements ConfigurationInterface
             ->httpStatusCodesToRetry($this->getHttpStatusCodesToRetry())
             ->httpMethodsToRetry($this->getHttpMethodsToRetry())
             ->environment($this->getEnvironment())
-            ->httpCallback($this->config['httpCallback'] ?? null);
+            ->httpCallback($this->config['httpCallback'] ?? null)
+            ->proxyConfiguration($this->getProxyConfigurationBuilder());
 
         $clientCredentialsAuth = $this->getClientCredentialsAuthCredentialsBuilder();
         if ($clientCredentialsAuth != null) {
@@ -153,6 +160,18 @@ class ShellEVClient implements ConfigurationInterface
     }
 
     /**
+     * Get the proxy configuration builder
+     */
+    public function getProxyConfigurationBuilder(): ProxyConfigurationBuilder
+    {
+        return ProxyConfigurationBuilder::init($this->proxyConfiguration['address'])
+            ->port($this->proxyConfiguration['port'])
+            ->tunnel($this->proxyConfiguration['tunnel'])
+            ->auth($this->proxyConfiguration['auth']['user'], $this->proxyConfiguration['auth']['pass'])
+            ->authMethod($this->proxyConfiguration['auth']['method']);
+    }
+
+    /**
      * Get the client configuration as an associative array
      *
      * @see ShellEVClientBuilder::getConfiguration()
@@ -223,13 +242,9 @@ class ShellEVClient implements ConfigurationInterface
      * @var array
      */
     private const ENVIRONMENT_MAP = [
-        Environment::PRODUCTION => [
-            Server::DEFAULT_ => 'https://api.shell.com/ev/v1',
-            Server::ACCESS_TOKEN_SERVER => 'https://api.shell.com/v2/oauth'
-        ],
-        Environment::ENVIRONMENT2 => [
-            Server::DEFAULT_ => 'https://api-test.shell.com/ev/v1',
-            Server::ACCESS_TOKEN_SERVER => 'https://api.shell.com/v2/oauth'
-        ]
+        Environment::PRODUCTION => [Server::DEFAULT_ => 'https://api.shell.com/ev'],
+        Environment::ENVIRONMENT2 => [Server::DEFAULT_ => 'https://api.shell.com/v2/oauth'],
+        Environment::ENVIRONMENT3 => [Server::DEFAULT_ => 'https://api-test.shell.com/ev'],
+        Environment::ENVIRONMENT4 => [Server::DEFAULT_ => 'https://api-test.shell.com/v2/oauth']
     ];
 }

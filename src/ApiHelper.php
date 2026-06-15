@@ -26,7 +26,10 @@ class ApiHelper
      */
     private const DISCRIMINATOR_SUBSTITUTIONS = [
         'singleLocation' => 'SingleLocation',
-        'multiLocation' => 'MultiLocation'
+        'multiLocation' => 'MultiLocation',
+        'singleLocation2' => 'SingleLocation',
+        'multiLocation2' => 'MultiLocation',
+        'markerType2' => 'markerType'
     ];
 
     /**

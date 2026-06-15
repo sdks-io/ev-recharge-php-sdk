@@ -14,6 +14,7 @@ use Core\Types\Sdk\CoreCallback;
 use Core\Utils\CoreHelper;
 use ShellEVLib\Authentication\ClientCredentialsAuthCredentialsBuilder;
 use ShellEVLib\Models\OAuthToken;
+use ShellEVLib\Proxy\ProxyConfigurationBuilder;
 
 class ShellEVClientBuilder
 {
@@ -170,6 +171,12 @@ class ShellEVClientBuilder
             return $this;
         }
         $this->config['httpCallback'] = $httpCallback;
+        return $this;
+    }
+
+    public function proxyConfiguration(ProxyConfigurationBuilder $proxyConfiguration): self
+    {
+        $this->config['proxyConfiguration'] = $proxyConfiguration->getConfiguration();
         return $this;
     }
 

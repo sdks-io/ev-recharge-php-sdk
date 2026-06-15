@@ -12,6 +12,7 @@ namespace ShellEVLib;
 
 use CoreInterfaces\Http\HttpConfigurations;
 use ShellEVLib\Authentication\ClientCredentialsAuthCredentialsBuilder;
+use ShellEVLib\Proxy\ProxyConfigurationBuilder;
 
 /**
  * An interface for all configuration parameters required by the SDK.
@@ -32,6 +33,11 @@ interface ConfigurationInterface extends HttpConfigurations
      * Get the credentials builder instance to update credentials for ClientCredentialsAuth
      */
     public function getClientCredentialsAuthCredentialsBuilder(): ?ClientCredentialsAuthCredentialsBuilder;
+
+    /**
+     * Represents the proxy configurations for API calls.
+     */
+    public function getProxyConfigurationBuilder(): ProxyConfigurationBuilder;
 
     /**
      * Get the base uri for a given server in the current environment.

@@ -152,6 +152,7 @@ class Tariff implements \JsonSerializable
 
     /**
      * Returns Updated By.
+     * Source of the last update of the tariff details
      */
     public function getUpdatedBy(): ?string
     {
@@ -160,6 +161,7 @@ class Tariff implements \JsonSerializable
 
     /**
      * Sets Updated By.
+     * Source of the last update of the tariff details
      *
      * @maps updatedBy
      * @factory \ShellEVLib\Models\TariffVOUpdatedByEnum::checkValue

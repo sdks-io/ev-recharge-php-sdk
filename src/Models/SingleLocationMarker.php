@@ -34,7 +34,7 @@ class SingleLocationMarker implements \JsonSerializable
     private $status;
 
     /**
-     * @var Coordinates|null
+     * @var Coordinates1|null
      */
     private $coordinates;
 
@@ -119,6 +119,8 @@ class SingleLocationMarker implements \JsonSerializable
 
     /**
      * Returns Status.
+     * Minimum of all status values in the Marker, e.g. if at least one Evse in the Marker is available,
+     * the value will be available
      */
     public function getStatus(): ?string
     {
@@ -127,6 +129,8 @@ class SingleLocationMarker implements \JsonSerializable
 
     /**
      * Sets Status.
+     * Minimum of all status values in the Marker, e.g. if at least one Evse in the Marker is available,
+     * the value will be available
      *
      * @maps status
      * @factory \ShellEVLib\Models\SingleLocationMarkerStatusEnum::checkValue
@@ -138,20 +142,18 @@ class SingleLocationMarker implements \JsonSerializable
 
     /**
      * Returns Coordinates.
-     * Coordinates of the Shell Recharge Site Location
      */
-    public function getCoordinates(): ?Coordinates
+    public function getCoordinates(): ?Coordinates1
     {
         return $this->coordinates;
     }
 
     /**
      * Sets Coordinates.
-     * Coordinates of the Shell Recharge Site Location
      *
      * @maps coordinates
      */
-    public function setCoordinates(?Coordinates $coordinates): void
+    public function setCoordinates(?Coordinates1 $coordinates): void
     {
         $this->coordinates = $coordinates;
     }

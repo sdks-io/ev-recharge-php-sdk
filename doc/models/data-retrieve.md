@@ -10,8 +10,8 @@
 | Name | Type | Tags | Description | Getter | Setter |
 |  --- | --- | --- | --- | --- | --- |
 | `id` | `?string` | Optional | Id of the session | getId(): ?string | setId(?string id): void |
-| `userId` | `?string` | Optional | Id of the user that started the session<br>**Constraints**: *Minimum Length*: `36`, *Maximum Length*: `36`, *Pattern*: `^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$` | getUserId(): ?string | setUserId(?string userId): void |
-| `emaId` | `?string` | Optional | Id of the evse that the user is charging<br>**Constraints**: *Minimum Length*: `12`, *Maximum Length*: `36` | getEmaId(): ?string | setEmaId(?string emaId): void |
+| `userId` | `?string` | Optional | Id of the user that started the session<br><br>**Constraints**: *Minimum Length*: `36`, *Maximum Length*: `36`, *Pattern*: `^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$` | getUserId(): ?string | setUserId(?string userId): void |
+| `emaId` | `?string` | Optional | Id of the evse that the user is charging<br><br>**Constraints**: *Minimum Length*: `12`, *Maximum Length*: `36` | getEmaId(): ?string | setEmaId(?string emaId): void |
 | `evseId` | `?string` | Optional | Ema-id of the charge token that is used | getEvseId(): ?string | setEvseId(?string evseId): void |
 | `lastUpdated` | `?string` | Optional | Last updated date | getLastUpdated(): ?string | setLastUpdated(?string lastUpdated): void |
 | `startedAt` | `?DateTime` | Optional | When the session is started | getStartedAt(): ?\DateTime | setStartedAt(?\DateTime startedAt): void |

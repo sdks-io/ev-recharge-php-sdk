@@ -18,10 +18,12 @@ use CoreInterfaces\Core\Request\RequestMethod;
 use ShellEVLib\Exceptions\ApiException;
 use ShellEVLib\Exceptions\BadRequestException;
 use ShellEVLib\Exceptions\InternalServerErrorException;
-use ShellEVLib\Exceptions\NotFoundException;
 use ShellEVLib\Exceptions\ServiceunavailableException;
 use ShellEVLib\Exceptions\TooManyRequestsException;
 use ShellEVLib\Exceptions\UnauthorizedException;
+use ShellEVLib\Exceptions\V2ChargeSessionRetrieve404ErrorException;
+use ShellEVLib\Exceptions\V2ChargeSessionStart404ErrorException;
+use ShellEVLib\Exceptions\V2ChargeSessionStop404ErrorException;
 use ShellEVLib\Models\ActiveResponse200Json;
 use ShellEVLib\Models\ChargesessionStartBody;
 use ShellEVLib\Models\GetChargeSessionRetrieveResponse200Json;
@@ -46,7 +48,7 @@ class ChargingController extends BaseController
      */
     public function start(string $requestId, ?ChargesessionStartBody $body = null): InlineResponse202
     {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/charge-session/start')
+        $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/v2/charge-session/start')
             ->auth('BearerAuth')
             ->parameters(
                 HeaderParam::init('RequestId', $requestId),
@@ -72,7 +74,10 @@ class ChargingController extends BaseController
                     UnauthorizedException::class
                 )
             )
-            ->throwErrorOn('404', ErrorType::init('Location Not Found', NotFoundException::class))
+            ->throwErrorOn(
+                '404',
+                ErrorType::init('Location Not Found', V2ChargeSessionStart404ErrorException::class)
+            )
             ->throwErrorOn(
                 '429',
                 ErrorType::init(
@@ -103,7 +108,7 @@ class ChargingController extends BaseController
      */
     public function stop(string $requestId, string $sessionId): InlineResponse2021
     {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/charge-session/stop')
+        $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/v2/charge-session/stop')
             ->auth('BearerAuth')
             ->parameters(HeaderParam::init('RequestId', $requestId), QueryParam::init('sessionId', $sessionId));
 
@@ -125,7 +130,10 @@ class ChargingController extends BaseController
                     UnauthorizedException::class
                 )
             )
-            ->throwErrorOn('404', ErrorType::init('Location Not Found', NotFoundException::class))
+            ->throwErrorOn(
+                '404',
+                ErrorType::init('Location Not Found', V2ChargeSessionStop404ErrorException::class)
+            )
             ->throwErrorOn(
                 '429',
                 ErrorType::init(
@@ -158,7 +166,7 @@ class ChargingController extends BaseController
         string $requestId,
         string $sessionId
     ): GetChargeSessionRetrieveResponse200Json {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/charge-session/retrieve')
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/v2/charge-session/retrieve')
             ->auth('BearerAuth')
             ->parameters(HeaderParam::init('RequestId', $requestId), QueryParam::init('sessionId', $sessionId));
 
@@ -180,7 +188,10 @@ class ChargingController extends BaseController
                     UnauthorizedException::class
                 )
             )
-            ->throwErrorOn('404', ErrorType::init('Location Not Found', NotFoundException::class))
+            ->throwErrorOn(
+                '404',
+                ErrorType::init('Location Not Found', V2ChargeSessionRetrieve404ErrorException::class)
+            )
             ->throwErrorOn(
                 '429',
                 ErrorType::init(
@@ -211,7 +222,7 @@ class ChargingController extends BaseController
      */
     public function active(string $requestId, string $emaId): ActiveResponse200Json
     {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/charge-session/active')
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/v2/charge-session/active')
             ->auth('BearerAuth')
             ->parameters(HeaderParam::init('RequestId', $requestId), QueryParam::init('emaId', $emaId));
 
