@@ -21,17 +21,7 @@ class Environment
     public const PRODUCTION = 'production';
 
     /**
-     * Production Server
+     * Test Server
      */
     public const ENVIRONMENT2 = 'environment2';
-
-    /**
-     * Test Server
-     */
-    public const ENVIRONMENT3 = 'environment3';
-
-    /**
-     * Test Server
-     */
-    public const ENVIRONMENT4 = 'environment4';
 }

@@ -242,9 +242,13 @@ class ShellEVClient implements ConfigurationInterface
      * @var array
      */
     private const ENVIRONMENT_MAP = [
-        Environment::PRODUCTION => [Server::DEFAULT_ => 'https://api.shell.com/ev'],
-        Environment::ENVIRONMENT2 => [Server::DEFAULT_ => 'https://api.shell.com/v2/oauth'],
-        Environment::ENVIRONMENT3 => [Server::DEFAULT_ => 'https://api-test.shell.com/ev'],
-        Environment::ENVIRONMENT4 => [Server::DEFAULT_ => 'https://api-test.shell.com/v2/oauth']
+        Environment::PRODUCTION => [
+            Server::DEFAULT_ => 'https://api.shell.com/ev',
+            Server::ACCESS_TOKEN_SERVER => 'https://api.shell.com/v2/oauth'
+        ],
+        Environment::ENVIRONMENT2 => [
+            Server::DEFAULT_ => 'https://api-test.shell.com/ev',
+            Server::ACCESS_TOKEN_SERVER => 'https://api.shell.com/v2/oauth'
+        ]
     ];
 }
