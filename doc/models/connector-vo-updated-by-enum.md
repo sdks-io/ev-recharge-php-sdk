@@ -18,7 +18,9 @@ Source of the last update
 
 ## Example
 
-```
-TariffService
+```php
+use ShellEVLib\Models\ConnectorVOUpdatedByEnum;
+
+$connectorVOUpdatedBy = ConnectorVOUpdatedByEnum::FEED;
 ```
 

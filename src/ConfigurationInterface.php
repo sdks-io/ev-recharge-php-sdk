@@ -46,5 +46,5 @@ interface ConfigurationInterface extends HttpConfigurations
      *
      * @return string Base URI
      */
-    public function getBaseUri(string $server = Server::DEFAULT_): string;
+    public function getBaseUri(string $server = Server::SHELL): string;
 }

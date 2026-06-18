@@ -18,19 +18,23 @@ A Marker is a place on the map that represent multiple Locations at the same spo
 | `operatorName` | `?string` | Optional | Operator of this Shell Recharge Location | getOperatorName(): ?string | setOperatorName(?string operatorName): void |
 | `markerType` | `string` | Required, Constant | Type of the Marker, in this case it will always be MultiLocation<br><br>**Value**: `'MultiLocation'` | getMarkerType(): string | setMarkerType(string markerType): void |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "locationCount": 6.0,
-  "evseCount": 10.0,
-  "maxPower": 42.0,
-  "operatorName": "TheNewMotion",
-  "markerType": "MultiLocation",
-  "coordinates": {
-    "latitude": 39.14,
-    "longitude": 36.94
-  }
-}
+```php
+use ShellEVLib\Models\Builders\MultiLocationMarkerV2Builder;
+use ShellEVLib\Models\Builders\CoordinatesBuilder;
+
+$multiLocationMarkerV2 = MultiLocationMarkerV2Builder::init()
+    ->coordinates(
+        CoordinatesBuilder::init()
+            ->latitude(39.14)
+            ->longitude(36.94)
+            ->build()
+    )
+    ->locationCount(6)
+    ->evseCount(10)
+    ->maxPower(42)
+    ->operatorName('TheNewMotion')
+    ->build();
 ```
 

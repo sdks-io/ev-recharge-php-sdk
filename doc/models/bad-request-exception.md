@@ -13,32 +13,15 @@
 | `status` | `?string` | Optional | Status of the request | getStatus(): ?string | setStatus(?string status): void |
 | `errors` | [`?(BadRequestErrMsg[])`](../../doc/models/bad-request-err-msg.md) | Optional | Exception details of the error | getErrors(): ?array | setErrors(?array errors): void |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "requestId": "9d2dee33-7803-485a-a2b1-2c7538e597ee",
-  "status": "FAILED",
-  "errors": [
-    {
-      "code": "code8",
-      "message": "message0",
-      "description": "description0",
-      "details": [
-        "details5",
-        "details6"
-      ]
-    },
-    {
-      "code": "code8",
-      "message": "message0",
-      "description": "description0",
-      "details": [
-        "details5",
-        "details6"
-      ]
-    }
-  ]
+```php
+try {
+    // make the API call
+} catch (BadRequestException $exp) {
+    echo 'Caught BadRequestException:', $exp;
+} catch (ApiException $exp) {
+    echo 'Caught ApiException:', $exp;
 }
 ```
 

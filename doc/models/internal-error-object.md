@@ -13,13 +13,15 @@
 | `message` | `?string` | Optional | Error description in English | getMessage(): ?string | setMessage(?string message): void |
 | `description` | `?string` | Optional | Technical details of the error message, the example which is given in the sample payload is one of the scenario. actual response will vary based on the technical nature | getDescription(): ?string | setDescription(?string description): void |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "code": "E0005",
-  "message": "Internal Server Error",
-  "description": "Server encountered an unexpected condition that prevented it from fulfilling the request"
-}
+```php
+use ShellEVLib\Models\Builders\InternalErrorObjectBuilder;
+
+$internalErrorObject = InternalErrorObjectBuilder::init()
+    ->code('E0005')
+    ->message('Internal Server Error')
+    ->description('Server encountered an unexpected condition that prevented it from fulfilling the request')
+    ->build();
 ```
 

@@ -17,17 +17,20 @@
 | `updatedBy` | [`?string(TariffVOUpdatedByEnum)`](../../doc/models/tariff-vo-updated-by-enum.md) | Optional | Source of the last update of the tariff details | getUpdatedBy(): ?string | setUpdatedBy(?string updatedBy): void |
 | `structure` | `?string` | Optional | Tariff structure that this tariff belongs to, typically Default unless specific tariff is defined for provider | getStructure(): ?string | setStructure(?string structure): void |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "startFee": 0.0,
-  "perMinute": 0.12,
-  "perKWh": 0.89,
-  "currency": "EUR",
-  "updated": "07/06/2021 10:44:24",
-  "updatedBy": "TariffService",
-  "structure": "default"
-}
+```php
+use ShellEVLib\Models\Builders\TariffBuilder;
+use ShellEVLib\Models\TariffVOUpdatedByEnum;
+
+$tariff = TariffBuilder::init()
+    ->startFee(0)
+    ->perMinute(0.12)
+    ->perKWh(0.89)
+    ->currency('EUR')
+    ->updated('2021-07-06T10:44:24Z')
+    ->updatedBy(TariffVOUpdatedByEnum::TARIFFSERVICE)
+    ->structure('default')
+    ->build();
 ```
 

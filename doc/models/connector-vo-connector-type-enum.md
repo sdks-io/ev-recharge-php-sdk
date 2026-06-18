@@ -32,7 +32,9 @@ Type of the connector in the EVSE unit.
 
 ## Example
 
-```
-Type2
+```php
+use ShellEVLib\Models\ConnectorVOConnectorTypeEnum;
+
+$connectorVOConnectorType = ConnectorVOConnectorTypeEnum::TYPE3;
 ```
 

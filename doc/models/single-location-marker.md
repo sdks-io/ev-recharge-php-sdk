@@ -22,22 +22,29 @@ A Marker is a place on the map that represent a single Location
 | `authorizationMethods` | [`?(string(SingleLocationMarkerAuthorizationMethodsItemsEnum)[])`](../../doc/models/single-location-marker-authorization-methods-items-enum.md) | Optional | Methods that can be used to Authorize sessions on this EVSE | getAuthorizationMethods(): ?array | setAuthorizationMethods(?array authorizationMethods): void |
 | `operatorId` | `?string` | Optional | Unique Id of the operator | getOperatorId(): ?string | setOperatorId(?string operatorId): void |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "markerType": "SingleLocation",
-  "uniqueKey": "2057411_1",
-  "status": "Available",
-  "evseCount": 12.0,
-  "maxPower": 42.0,
-  "geoHash": "sx",
-  "locationUid": 2057411,
-  "operatorId": "AT-HTB",
-  "coordinates": {
-    "latitude": 39.14,
-    "longitude": 36.94
-  }
-}
+```php
+use ShellEVLib\Models\Builders\SingleLocationMarkerBuilder;
+use ShellEVLib\Models\SingleLocationMarkerStatusEnum;
+use ShellEVLib\Models\Builders\Coordinates1Builder;
+
+$singleLocationMarker = SingleLocationMarkerBuilder::init(
+    'SingleLocation'
+)
+    ->uniqueKey('2057411_1')
+    ->status(SingleLocationMarkerStatusEnum::AVAILABLE)
+    ->coordinates(
+        Coordinates1Builder::init()
+            ->latitude(39.14)
+            ->longitude(36.94)
+            ->build()
+    )
+    ->evseCount(12)
+    ->maxPower(42)
+    ->geoHash('sx')
+    ->locationUid(2057411)
+    ->operatorId('AT-HTB')
+    ->build();
 ```
 

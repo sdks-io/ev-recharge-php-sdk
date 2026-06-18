@@ -18,7 +18,9 @@ Source of the last update of the tariff details
 
 ## Example
 
-```
-TariffService
+```php
+use ShellEVLib\Models\TariffVOUpdatedByEnum;
+
+$tariffVOUpdatedBy = TariffVOUpdatedByEnum::FEED;
 ```
 

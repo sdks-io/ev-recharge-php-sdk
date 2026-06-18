@@ -18,7 +18,9 @@ Accessibility Status
 
 ## Example
 
-```
-FreePublic
+```php
+use ShellEVLib\Models\AccessibilityStatusEnum;
+
+$accessibilityStatus = AccessibilityStatusEnum::FREEPUBLIC;
 ```
 

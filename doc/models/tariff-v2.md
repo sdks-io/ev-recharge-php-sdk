@@ -27,51 +27,66 @@ Tariff metadata aligned with TariffV2 GraphQL schema
 | `lastUpdated` | `DateTime` | Required | - | getLastUpdated(): \DateTime | setLastUpdated(\DateTime lastUpdated): void |
 | `createdBy` | `string` | Required | Identifier of the actor who created the tariff | getCreatedBy(): string | setCreatedBy(string createdBy): void |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "tariffId": "123e4567-e89b-12d3-a456-426614174000",
-  "tariffType": "DRIVER",
-  "powerRange": {
-    "min": 0,
-    "max": 100
-  },
-  "internalId": "123e4567-e89b-12d3-a456-426614174000",
-  "operatorId": "AT-HTB",
-  "providerId": "Shell_RP_2",
-  "currency": "EUR",
-  "tariffAltText": [
-    {
-      "language": "en",
-      "text": "€0.30 per kWh"
-    }
-  ],
-  "minPrice": 0.3,
-  "maxPrice": 999.0,
-  "elements": [
-    {
-      "priceComponents": [
-        {
-          "type": "FLAT",
-          "stepSize": 1,
-          "price": 0.3,
-          "vat": 21.0
-        }
-      ],
-      "restrictions": {
-        "startTime": "startTime0",
-        "endTime": "endTime2",
-        "startDate": "2016-03-13",
-        "endDate": "2016-03-13",
-        "minKwh": 247.22
-      }
-    }
-  ],
-  "startDateTime": "10/06/2021 10:44:24",
-  "endDateTime": "10/06/2021 10:44:24",
-  "lastUpdated": "10/06/2021 10:44:24",
-  "createdBy": "STAGE_API"
-}
+```php
+use ShellEVLib\Models\Builders\TariffV2Builder;
+use ShellEVLib\Models\TariffTypeEnum;
+use ShellEVLib\Models\Builders\PowerRangeBuilder;
+use ShellEVLib\Models\Builders\TariffElementBuilder;
+use ShellEVLib\Models\Builders\PriceComponentBuilder;
+use ShellEVLib\Models\TypeEnum;
+use ShellEVLib\Models\Builders\RestrictionsBuilder;
+use ShellEVLib\Utils\DateTimeHelper;
+use ShellEVLib\Models\Builders\TariffAltTextBuilder;
+
+$tariffV2 = TariffV2Builder::init(
+    '123e4567-e89b-12d3-a456-426614174000',
+    TariffTypeEnum::REIMBURSEMENT,
+    PowerRangeBuilder::init(
+        0,
+        100
+    )->build(),
+    '123e4567-e89b-12d3-a456-426614174000',
+    'AT-HTB',
+    'Shell_RP_2',
+    'EUR',
+    0.3,
+    999,
+    [
+        TariffElementBuilder::init(
+            [
+                PriceComponentBuilder::init(
+                    TypeEnum::FLAT,
+                    1,
+                    0.3,
+                    21
+                )->build()
+            ]
+        )
+            ->restrictions(
+                RestrictionsBuilder::init()
+                    ->startTime('startTime0')
+                    ->endTime('endTime2')
+                    ->startDate(DateTimeHelper::fromSimpleDate('2016-03-13'))
+                    ->endDate(DateTimeHelper::fromSimpleDate('2016-03-13'))
+                    ->minKwh(247.22)
+                    ->build()
+            )
+            ->build()
+    ],
+    DateTimeHelper::fromRfc3339DateTimeRequired('2021-10-06T10:44:24Z'),
+    DateTimeHelper::fromRfc3339DateTimeRequired('2021-10-06T10:44:24Z'),
+    DateTimeHelper::fromRfc3339DateTimeRequired('2021-10-06T10:44:24Z'),
+    'STAGE_API'
+)
+    ->tariffAltText(
+        [
+            TariffAltTextBuilder::init(
+                'en',
+                '€0.30 per kWh'
+            )->build()
+        ]
+    )->build();
 ```
 

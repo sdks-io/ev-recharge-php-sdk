@@ -19,7 +19,9 @@
 
 ## Example
 
-```
-MONDAY
+```php
+use ShellEVLib\Models\DayOfWeekEnum;
+
+$dayOfWeek = DayOfWeekEnum::SUNDAY;
 ```
 

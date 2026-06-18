@@ -21,21 +21,26 @@ A Marker is a place on the map that represent a single Location
 | `operatorName` | `?string` | Optional | Operator of this Shell Recharge Location | getOperatorName(): ?string | setOperatorName(?string operatorName): void |
 | `markerType` | `string` | Required, Constant | Type of the Marker, in this case it will always be SingleLocation<br><br>**Value**: `'SingleLocation'` | getMarkerType(): string | setMarkerType(string markerType): void |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "status": "Available",
-  "evseCount": 12.0,
-  "locationCount": 6.0,
-  "locationUid": "2057411",
-  "operatorName": "TheNewMotion",
-  "markerType": "SingleLocation",
-  "coordinates": {
-    "latitude": 39.14,
-    "longitude": 36.94
-  },
-  "maxPower": 45.08
-}
+```php
+use ShellEVLib\Models\Builders\SingleLocationMarkerV2Builder;
+use ShellEVLib\Models\SingleLocationMarkerStatusEnum;
+use ShellEVLib\Models\Builders\CoordinatesBuilder;
+
+$singleLocationMarkerV2 = SingleLocationMarkerV2Builder::init()
+    ->status(SingleLocationMarkerStatusEnum::AVAILABLE)
+    ->coordinates(
+        CoordinatesBuilder::init()
+            ->latitude(39.14)
+            ->longitude(36.94)
+            ->build()
+    )
+    ->evseCount(12)
+    ->maxPower(75.6)
+    ->locationCount(6)
+    ->locationUid('2057411')
+    ->operatorName('TheNewMotion')
+    ->build();
 ```
 

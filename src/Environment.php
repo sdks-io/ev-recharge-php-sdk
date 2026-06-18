@@ -15,13 +15,7 @@ namespace ShellEVLib;
  */
 class Environment
 {
-    /**
-     * Production Server
-     */
-    public const PRODUCTION = 'production';
+    public const SIT = 'SIT';
 
-    /**
-     * Test Server
-     */
-    public const ENVIRONMENT2 = 'environment2';
+    public const PRODUCTION = 'Production';
 }

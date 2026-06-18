@@ -22,27 +22,35 @@
 | `operatorId` | `?string` | Optional | Unique Id of the operator | getOperatorId(): ?string | setOperatorId(?string operatorId): void |
 | `openTwentyFourSeven` | `?bool` | Optional | Whether the location is open 24/7 | getOpenTwentyFourSeven(): ?bool | setOpenTwentyFourSeven(?bool openTwentyFourSeven): void |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "NL*MKS*E0000001*0",
-  "externalId": "01001188",
-  "operatorName": "TheNewMotion",
-  "updated": "10/06/2021 10:44:24",
-  "locationType": "Unknown",
-  "operatorId": "AT-HTB",
-  "openTwentyFourSeven": true,
-  "coordinates": {
-    "latitude": 39.14,
-    "longitude": 36.94
-  },
-  "address": {
-    "streetAndNumber": "streetAndNumber2",
-    "postalCode": "postalCode8",
-    "city": "city6",
-    "country": "country0"
-  }
-}
+```php
+use ShellEVLib\Models\Builders\LocationResponeObjectV2Builder;
+use ShellEVLib\Models\Builders\CoordinatesBuilder;
+use ShellEVLib\Models\Builders\AddressBuilder;
+
+$locationResponeObjectV2 = LocationResponeObjectV2Builder::init()
+    ->uid('NL*MKS*E0000001*0')
+    ->externalId('01001188')
+    ->coordinates(
+        CoordinatesBuilder::init()
+            ->latitude(39.14)
+            ->longitude(36.94)
+            ->build()
+    )
+    ->operatorName('TheNewMotion')
+    ->address(
+        AddressBuilder::init()
+            ->streetAndNumber('streetAndNumber2')
+            ->postalCode('postalCode8')
+            ->city('city6')
+            ->country('country0')
+            ->build()
+    )
+    ->updated('2021-10-06T10:44:24Z')
+    ->locationType('Unknown')
+    ->operatorId('AT-HTB')
+    ->openTwentyFourSeven(true)
+    ->build();
 ```
 

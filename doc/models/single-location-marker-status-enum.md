@@ -18,7 +18,9 @@ Minimum of all status values in the Marker, e.g. if at least one Evse in the Mar
 
 ## Example
 
-```
-Available
+```php
+use ShellEVLib\Models\SingleLocationMarkerStatusEnum;
+
+$singleLocationMarkerStatus = SingleLocationMarkerStatusEnum::AVAILABLE;
 ```
 

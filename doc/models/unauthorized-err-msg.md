@@ -14,17 +14,20 @@
 | `description` | `?string` | Optional | Technical details of the error message, the example which is given in the sample payload is one of the scenarios. actual response will vary based on the technical nature | getDescription(): ?string | setDescription(?string description): void |
 | `details` | `?(string[])` | Optional | - | getDetails(): ?array | setDetails(?array details): void |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "code": "E0003",
-  "message": "Unauthorized",
-  "description": "Invalid Access Token",
-  "details": [
-    "details1",
-    "details2"
-  ]
-}
+```php
+use ShellEVLib\Models\Builders\UnauthorizedErrMsgBuilder;
+
+$unauthorizedErrMsg = UnauthorizedErrMsgBuilder::init()
+    ->code('E0003')
+    ->message('Unauthorized')
+    ->description('Invalid Access Token')
+    ->details(
+        [
+            'details9'
+        ]
+    )
+    ->build();
 ```
 

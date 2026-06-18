@@ -5,7 +5,7 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| environment | [`Environment`](../README.md#environments) | The API environment. <br> **Default: `Environment.PRODUCTION`** |
+| environment | [`Environment`](../README.md#environments) | The API environment. <br> **Default: `Environment.SIT`** |
 | timeout | `int` | Timeout for API calls in seconds.<br>*Default*: `0` |
 | enableRetries | `bool` | Whether to enable retries and backoff feature.<br>*Default*: `false` |
 | numberOfRetries | `int` | The number of retries to make.<br>*Default*: `0` |
@@ -32,7 +32,7 @@ $client = ShellEVClientBuilder::init()
             'OAuthClientSecret'
         )
     )
-    ->environment(Environment::PRODUCTION)
+    ->environment(Environment::SIT)
     ->build();
 ```
 

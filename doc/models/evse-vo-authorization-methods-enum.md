@@ -17,7 +17,9 @@ Methods that can be used to Authorize sessions on this EVSE
 
 ## Example
 
-```
-NewMotionApp
+```php
+use ShellEVLib\Models\EvseVOAuthorizationMethodsEnum;
+
+$evseVOAuthorizationMethods = EvseVOAuthorizationMethodsEnum::NEWMOTIONAPP;
 ```
 

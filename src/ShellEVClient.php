@@ -56,7 +56,7 @@ class ShellEVClient implements ConfigurationInterface
             ->jsonHelper(ApiHelper::getJsonHelper())
             ->apiCallback($this->config['httpCallback'] ?? null)
             ->userAgent('APIMATIC 3.0')
-            ->serverUrls(self::ENVIRONMENT_MAP[$this->getEnvironment()], Server::DEFAULT_)
+            ->serverUrls(self::ENVIRONMENT_MAP[$this->getEnvironment()], Server::SHELL)
             ->authManagers(['BearerAuth' => $this->clientCredentialsAuthManager])
             ->build();
         $this->clientCredentialsAuthManager->setClient($this->client);
@@ -198,7 +198,7 @@ class ShellEVClient implements ConfigurationInterface
      *
      * @return string Base URI
      */
-    public function getBaseUri(string $server = Server::DEFAULT_): string
+    public function getBaseUri(string $server = Server::SHELL): string
     {
         return $this->client->getGlobalRequest($server)->getQueryUrl();
     }
@@ -242,13 +242,13 @@ class ShellEVClient implements ConfigurationInterface
      * @var array
      */
     private const ENVIRONMENT_MAP = [
-        Environment::PRODUCTION => [
-            Server::DEFAULT_ => 'https://api.shell.com/ev',
-            Server::ACCESS_TOKEN_SERVER => 'https://api.shell.com/v2/oauth'
+        Environment::SIT => [
+            Server::OAUTH_SERVER => 'https://api-test.shell.com',
+            Server::SHELL => 'https://api-test.shell.com/ev'
         ],
-        Environment::ENVIRONMENT2 => [
-            Server::DEFAULT_ => 'https://api-test.shell.com/ev',
-            Server::ACCESS_TOKEN_SERVER => 'https://api.shell.com/v2/oauth'
+        Environment::PRODUCTION => [
+            Server::OAUTH_SERVER => 'https://api.shell.com',
+            Server::SHELL => 'https://api.shell.com/ev'
         ]
     ];
 }

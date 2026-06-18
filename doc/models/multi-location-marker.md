@@ -19,20 +19,26 @@ A Marker is a place on the map that represent multiple Locations at the same spo
 | `maxPower` | `?float` | Optional | Maximum power in kW across all locations grouped in this marker (disregarding availability) | getMaxPower(): ?float | setMaxPower(?float maxPower): void |
 | `geoHash` | `?string` | Optional | GeoHash of marker coordinates | getGeoHash(): ?string | setGeoHash(?string geoHash): void |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "markerType": "MultiLocation",
-  "uniqueKey": "2060319_6",
-  "locationCount": 6.0,
-  "evseCount": 10.0,
-  "maxPower": 42.0,
-  "geoHash": "sx",
-  "coordinates": {
-    "latitude": 39.14,
-    "longitude": 36.94
-  }
-}
+```php
+use ShellEVLib\Models\Builders\MultiLocationMarkerBuilder;
+use ShellEVLib\Models\Builders\Coordinates1Builder;
+
+$multiLocationMarker = MultiLocationMarkerBuilder::init(
+    'MultiLocation'
+)
+    ->uniqueKey('2060319_6')
+    ->coordinates(
+        Coordinates1Builder::init()
+            ->latitude(39.14)
+            ->longitude(36.94)
+            ->build()
+    )
+    ->locationCount(6)
+    ->evseCount(10)
+    ->maxPower(42)
+    ->geoHash('sx')
+    ->build();
 ```
 

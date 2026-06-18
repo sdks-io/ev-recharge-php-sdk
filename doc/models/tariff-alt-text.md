@@ -12,12 +12,14 @@
 | `language` | `string` | Required | ISO language code | getLanguage(): string | setLanguage(string language): void |
 | `text` | `string` | Required | Human readable tariff description | getText(): string | setText(string text): void |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "language": "en",
-  "text": "€0.30 per kWh"
-}
+```php
+use ShellEVLib\Models\Builders\TariffAltTextBuilder;
+
+$tariffAltText = TariffAltTextBuilder::init(
+    'en',
+    '€0.30 per kWh'
+)->build();
 ```
 

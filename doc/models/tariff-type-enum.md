@@ -16,3 +16,11 @@ Tariff type classification
 | `REIMBURSEMENT` |
 | `VMSP` |
 
+## Example
+
+```php
+use ShellEVLib\Models\TariffTypeEnum;
+
+$tariffType = TariffTypeEnum::REIMBURSEMENT;
+```
+

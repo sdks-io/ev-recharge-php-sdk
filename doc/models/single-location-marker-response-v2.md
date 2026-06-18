@@ -13,36 +13,33 @@
 | `status` | `?string` | Optional | status of the API call | getStatus(): ?string | setStatus(?string status): void |
 | `data` | array<[SingleLocationMarkerV2](../../doc/models/single-location-marker-v2.md)\|[MultiLocationMarkerV2](../../doc/models/multi-location-marker-v2.md)>\|null | Optional | - | getData(): ?array | setData(?array data): void |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "requestId": "9d2dee33-7803-485a-a2b1-2c7538e597ee",
-  "status": "SUCCESS",
-  "data": [
-    {
-      "markerType": "SingleLocation",
-      "status": "Unavailable",
-      "coordinates": {
-        "latitude": 39.14,
-        "longitude": 36.94
-      },
-      "evseCount": 223.04,
-      "maxPower": 45.08,
-      "locationCount": 62.98
-    },
-    {
-      "markerType": "SingleLocation",
-      "status": "Unavailable",
-      "coordinates": {
-        "latitude": 39.14,
-        "longitude": 36.94
-      },
-      "evseCount": 223.04,
-      "maxPower": 45.08,
-      "locationCount": 62.98
-    }
-  ]
-}
+```php
+use ShellEVLib\Models\Builders\SingleLocationMarkerResponseV2Builder;
+use ShellEVLib\Models\Builders\SingleLocationMarkerV2Builder;
+use ShellEVLib\Models\SingleLocationMarkerStatusEnum;
+use ShellEVLib\Models\Builders\CoordinatesBuilder;
+
+$singleLocationMarkerResponseV2 = SingleLocationMarkerResponseV2Builder::init()
+    ->requestId('9d2dee33-7803-485a-a2b1-2c7538e597ee')
+    ->status('SUCCESS')
+    ->data(
+        [
+            SingleLocationMarkerV2Builder::init()
+                ->status(SingleLocationMarkerStatusEnum::UNAVAILABLE)
+                ->coordinates(
+                    CoordinatesBuilder::init()
+                        ->latitude(39.14)
+                        ->longitude(36.94)
+                        ->build()
+                )
+                ->evseCount(223.04)
+                ->maxPower(45.08)
+                ->locationCount(62.98)
+                ->build()
+        ]
+    )
+    ->build();
 ```
 

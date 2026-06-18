@@ -33,7 +33,7 @@ class ConfigurationDefaults
 
     public const HTTP_METHODS_TO_RETRY = ['GET', 'PUT'];
 
-    public const ENVIRONMENT = Environment::PRODUCTION;
+    public const ENVIRONMENT = Environment::SIT;
 
     public const O_AUTH_CLIENT_ID = '';
 

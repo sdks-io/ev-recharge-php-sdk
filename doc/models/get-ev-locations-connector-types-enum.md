@@ -30,3 +30,11 @@ Filter by Locations that have Connectors with the set of Connector Types
 | `TESLA` |
 | `UNSPECIFIED` |
 
+## Example
+
+```php
+use ShellEVLib\Models\GetEVLocationsConnectorTypesEnum;
+
+$getEVLocationsConnectorTypes = GetEVLocationsConnectorTypesEnum::AVCON;
+```
+

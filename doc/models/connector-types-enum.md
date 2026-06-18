@@ -28,3 +28,11 @@
 | `TESLA` |
 | `UNSPECIFIED` |
 
+## Example
+
+```php
+use ShellEVLib\Models\ConnectorTypesEnum;
+
+$connectorTypes = ConnectorTypesEnum::TYPE2;
+```
+

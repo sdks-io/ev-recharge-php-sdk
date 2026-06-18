@@ -21,7 +21,9 @@
 
 ## Example
 
-```
-Mon
+```php
+use ShellEVLib\Models\OpeningHoursObjectWeekDayEnum;
+
+$openingHoursObjectWeekDay = OpeningHoursObjectWeekDayEnum::SAT;
 ```
 

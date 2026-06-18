@@ -18,7 +18,9 @@ The current status of the EVSE units availability
 
 ## Example
 
-```
-Available
+```php
+use ShellEVLib\Models\EvseVOStatusEnum;
+
+$evseVOStatus = EvseVOStatusEnum::AVAILABLE;
 ```
 

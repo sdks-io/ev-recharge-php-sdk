@@ -16,14 +16,17 @@ Electrical Properties of the Connector
 | `amperage` | `?float` | Optional | Electric Current in Amperes for this connector | getAmperage(): ?float | setAmperage(?float amperage): void |
 | `maxElectricPower` | `?float` | Optional | Power in Kilowatts for this connector | getMaxElectricPower(): ?float | setMaxElectricPower(?float maxElectricPower): void |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "powerType": "AC1Phase",
-  "voltage": 230.0,
-  "amperage": 16.0,
-  "maxElectricPower": 3.7
-}
+```php
+use ShellEVLib\Models\Builders\ElectricalPropertiesV2Builder;
+use ShellEVLib\Models\ElectricalPropertiesPowerTypeEnum;
+
+$electricalPropertiesV2 = ElectricalPropertiesV2Builder::init()
+    ->powerType(ElectricalPropertiesPowerTypeEnum::AC1PHASE)
+    ->voltage(230)
+    ->amperage(16)
+    ->maxElectricPower(3.7)
+    ->build();
 ```
 

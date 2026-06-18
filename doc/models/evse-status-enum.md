@@ -14,3 +14,11 @@
 | `UNAVAILABLE` |
 | `UNKNOWN` |
 
+## Example
+
+```php
+use ShellEVLib\Models\EvseStatusEnum;
+
+$evseStatus = EvseStatusEnum::AVAILABLE;
+```
+

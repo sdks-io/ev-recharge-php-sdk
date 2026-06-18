@@ -14,14 +14,17 @@
 | `price` | `float` | Required | Price per step in the specified currency for this price component | getPrice(): float | setPrice(float price): void |
 | `vat` | `float` | Required | VAT percentage applicable to this price component | getVat(): float | setVat(float vat): void |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "type": "FLAT",
-  "stepSize": 1,
-  "price": 0.3,
-  "vat": 21.0
-}
+```php
+use ShellEVLib\Models\Builders\PriceComponentBuilder;
+use ShellEVLib\Models\TypeEnum;
+
+$priceComponent = PriceComponentBuilder::init(
+    TypeEnum::FLAT,
+    1,
+    0.3,
+    21
+)->build();
 ```
 

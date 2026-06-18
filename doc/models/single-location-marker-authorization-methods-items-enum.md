@@ -13,3 +13,11 @@
 | `RFIDTOKEN` |
 | `PNC` |
 
+## Example
+
+```php
+use ShellEVLib\Models\SingleLocationMarkerAuthorizationMethodsItemsEnum;
+
+$singleLocationMarkerAuthorizationMethodsItems = SingleLocationMarkerAuthorizationMethodsItemsEnum::RFIDTOKEN;
+```
+

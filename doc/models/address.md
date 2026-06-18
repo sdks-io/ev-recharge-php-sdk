@@ -16,14 +16,16 @@ Address of the Shell Recharge Location
 | `city` | `?string` | Optional | City name of the Shell Recharge Location | getCity(): ?string | setCity(?string city): void |
 | `country` | `?string` | Optional | ISO 3166 Alpha-2 Country Code of the Shell Recharge Location | getCountry(): ?string | setCountry(?string country): void |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "streetAndNumber": "Maarssenbroeksedijk 33",
-  "postalCode": "3542 DM",
-  "city": "Utrecht",
-  "country": "NLD"
-}
+```php
+use ShellEVLib\Models\Builders\AddressBuilder;
+
+$address = AddressBuilder::init()
+    ->streetAndNumber('Maarssenbroeksedijk 33')
+    ->postalCode('3542 DM')
+    ->city('Utrecht')
+    ->country('NLD')
+    ->build();
 ```
 

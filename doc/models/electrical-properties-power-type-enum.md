@@ -17,7 +17,9 @@ Power Type used in this connector.
 
 ## Example
 
-```
-AC1Phase
+```php
+use ShellEVLib\Models\ElectricalPropertiesPowerTypeEnum;
+
+$electricalPropertiesPowerType = ElectricalPropertiesPowerTypeEnum::AC3PHASE;
 ```
 

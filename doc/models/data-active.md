@@ -18,16 +18,19 @@
 | `sessionState` | [`?ChargeRetrieveState`](../../doc/models/charge-retrieve-state.md) | Optional | - | getSessionState(): ?ChargeRetrieveState | setSessionState(?ChargeRetrieveState sessionState): void |
 | `lastUpdated` | `?string` | Optional | - | getLastUpdated(): ?string | setLastUpdated(?string lastUpdated): void |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": "78b5d7a3-bdba-43d7-9851-1c84fcddb782",
-  "userId": "281482b6-2c9a-4fd1-b3ea-1928edb40ef9",
-  "emaId": "NL-TNM-C00122045-K",
-  "evseId": "NL*TNM*E02003451*0",
-  "startedAt": "08/19/2015 11:20:27",
-  "stoppedAt": "08/19/2015 11:20:27"
-}
+```php
+use ShellEVLib\Models\Builders\DataActiveBuilder;
+use ShellEVLib\Utils\DateTimeHelper;
+
+$dataActive = DataActiveBuilder::init()
+    ->id('78b5d7a3-bdba-43d7-9851-1c84fcddb782')
+    ->userId('281482b6-2c9a-4fd1-b3ea-1928edb40ef9')
+    ->emaId('NL-TNM-C00122045-K')
+    ->evseId('NL*TNM*E02003451*0')
+    ->startedAt(DateTimeHelper::fromRfc3339DateTime('2015-08-19T11:20:27Z'))
+    ->stoppedAt(DateTimeHelper::fromRfc3339DateTime('2015-08-19T11:20:27Z'))
+    ->build();
 ```
 

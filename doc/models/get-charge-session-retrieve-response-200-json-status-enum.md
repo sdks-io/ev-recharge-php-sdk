@@ -16,7 +16,9 @@ Indicates overall status of the request
 
 ## Example
 
-```
-SUCCESS
+```php
+use ShellEVLib\Models\GetChargeSessionRetrieveResponse200JsonStatusEnum;
+
+$getChargeSessionRetrieveResponse200JsonStatus = GetChargeSessionRetrieveResponse200JsonStatusEnum::SUCCESS;
 ```
 

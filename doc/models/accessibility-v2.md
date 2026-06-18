@@ -13,11 +13,14 @@ Accessibility of the Location
 |  --- | --- | --- | --- | --- | --- |
 | `status` | [`?string(AccessibilityStatusEnum)`](../../doc/models/accessibility-status-enum.md) | Optional | Accessibility Status | getStatus(): ?string | setStatus(?string status): void |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "status": "FreePublic"
-}
+```php
+use ShellEVLib\Models\Builders\AccessibilityV2Builder;
+use ShellEVLib\Models\AccessibilityStatusEnum;
+
+$accessibilityV2 = AccessibilityV2Builder::init()
+    ->status(AccessibilityStatusEnum::FREEPUBLIC)
+    ->build();
 ```
 

@@ -16,3 +16,11 @@ Filter by Locations that have the given status
 | `UNAVAILABLE` |
 | `UNKNOWN` |
 
+## Example
+
+```php
+use ShellEVLib\Models\NearbyLocationsEvseStatusEnum;
+
+$nearbyLocationsEvseStatus = NearbyLocationsEvseStatusEnum::UNAVAILABLE;
+```
+

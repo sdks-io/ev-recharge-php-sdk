@@ -15,3 +15,11 @@ Filter by Locations that support the given Authorization Methods
 | `RFIDTOKEN` |
 | `PNC` |
 
+## Example
+
+```php
+use ShellEVLib\Models\NearbyLocationsAuthorizationMethodsEnum;
+
+$nearbyLocationsAuthorizationMethods = NearbyLocationsAuthorizationMethodsEnum::NEWMOTIONAPP;
+```
+

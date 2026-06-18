@@ -14,18 +14,20 @@
 | `description` | `?string` | Optional | Technical details of the error message, the example which is given in the sample payload is one of the scenarios. actual response will vary based on the validation error | getDescription(): ?string | setDescription(?string description): void |
 | `details` | `?(string[])` | Optional | - | getDetails(): ?array | setDetails(?array details): void |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "code": "E0001",
-  "message": "Bad Request",
-  "description": "Authorization header is missing",
-  "details": [
-    "details7",
-    "details8",
-    "details9"
-  ]
-}
+```php
+use ShellEVLib\Models\Builders\BadRequestErrMsgBuilder;
+
+$badRequestErrMsg = BadRequestErrMsgBuilder::init()
+    ->code('E0001')
+    ->message('Bad Request')
+    ->description('Authorization header is missing')
+    ->details(
+        [
+            'details3'
+        ]
+    )
+    ->build();
 ```
 

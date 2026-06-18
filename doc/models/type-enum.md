@@ -18,7 +18,9 @@ Type of the price component
 
 ## Example
 
-```
-FLAT
+```php
+use ShellEVLib\Models\TypeEnum;
+
+$type = TypeEnum::FLAT;
 ```
 

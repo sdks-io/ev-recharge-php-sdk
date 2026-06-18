@@ -23,22 +23,25 @@
 | `maxDuration` | `?int` | Optional | Maximum session duration in seconds | getMaxDuration(): ?int | setMaxDuration(?int maxDuration): void |
 | `dayOfWeek` | [`?(string(DayOfWeekEnum)[])`](../../doc/models/day-of-week-enum.md) | Optional | - | getDayOfWeek(): ?array | setDayOfWeek(?array dayOfWeek): void |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "startTime": "08:00",
-  "endTime": "18:00",
-  "startDate": "2021-10-06",
-  "endDate": "2021-10-31",
-  "minKwh": 0.1,
-  "maxKwh": 100,
-  "minCurrent": 0,
-  "maxCurrent": 500,
-  "minPower": 0,
-  "maxPower": 100,
-  "minDuration": 0,
-  "maxDuration": 86400
-}
+```php
+use ShellEVLib\Models\Builders\RestrictionsBuilder;
+use ShellEVLib\Utils\DateTimeHelper;
+
+$restrictions = RestrictionsBuilder::init()
+    ->startTime('08:00')
+    ->endTime('18:00')
+    ->startDate(DateTimeHelper::fromSimpleDate('2021-10-06'))
+    ->endDate(DateTimeHelper::fromSimpleDate('2021-10-31'))
+    ->minKwh(0.1)
+    ->maxKwh(100)
+    ->minCurrent(0)
+    ->maxCurrent(500)
+    ->minPower(0)
+    ->maxPower(100)
+    ->minDuration(0)
+    ->maxDuration(86400)
+    ->build();
 ```
 

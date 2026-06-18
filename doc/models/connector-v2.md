@@ -16,19 +16,26 @@ An EVSE can have one or many Connectors. Each Connector will normally have a dif
 | `connectorType` | [`?string(ConnectorVOConnectorTypeEnum)`](../../doc/models/connector-vo-connector-type-enum.md) | Optional | Type of the connector in the EVSE unit. | getConnectorType(): ?string | setConnectorType(?string connectorType): void |
 | `electricalProperties` | [`?ElectricalPropertiesV2`](../../doc/models/electrical-properties-v2.md) | Optional | Electrical Properties of the Connector | getElectricalProperties(): ?ElectricalPropertiesV2 | setElectricalProperties(?ElectricalPropertiesV2 electricalProperties): void |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "2",
-  "externalId": "01000861_1_21",
-  "connectorType": "Type2",
-  "electricalProperties": {
-    "powerType": "AC1Phase",
-    "voltage": 110.62,
-    "amperage": 46.4,
-    "maxElectricPower": 232.04
-  }
-}
+```php
+use ShellEVLib\Models\Builders\ConnectorV2Builder;
+use ShellEVLib\Models\ConnectorVOConnectorTypeEnum;
+use ShellEVLib\Models\Builders\ElectricalPropertiesV2Builder;
+use ShellEVLib\Models\ElectricalPropertiesPowerTypeEnum;
+
+$connectorV2 = ConnectorV2Builder::init()
+    ->uid('2')
+    ->externalId('01000861_1_21')
+    ->connectorType(ConnectorVOConnectorTypeEnum::TYPE2)
+    ->electricalProperties(
+        ElectricalPropertiesV2Builder::init()
+            ->powerType(ElectricalPropertiesPowerTypeEnum::AC1PHASE)
+            ->voltage(110.62)
+            ->amperage(46.4)
+            ->maxElectricPower(232.04)
+            ->build()
+    )
+    ->build();
 ```
 

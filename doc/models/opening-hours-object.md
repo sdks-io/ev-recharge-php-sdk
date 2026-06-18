@@ -13,13 +13,16 @@
 | `startTime` | `?string` | Optional | Hour in 24h local time when the location opens. | getStartTime(): ?string | setStartTime(?string startTime): void |
 | `endTime` | `?string` | Optional | Hour in 24h local time when the location closes. | getEndTime(): ?string | setEndTime(?string endTime): void |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "weekDay": "Mon",
-  "startTime": "08:00",
-  "endTime": "23:00"
-}
+```php
+use ShellEVLib\Models\Builders\OpeningHoursObjectBuilder;
+use ShellEVLib\Models\OpeningHoursObjectWeekDayEnum;
+
+$openingHoursObject = OpeningHoursObjectBuilder::init()
+    ->weekDay(OpeningHoursObjectWeekDayEnum::MON)
+    ->startTime('08:00')
+    ->endTime('23:00')
+    ->build();
 ```
 

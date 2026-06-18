@@ -30,3 +30,11 @@ Filter by Locations that have Connectors with these Connector Types
 | `TESLA` |
 | `UNSPECIFIED` |
 
+## Example
+
+```php
+use ShellEVLib\Models\NearbyLocationsConnectorTypesEnum;
+
+$nearbyLocationsConnectorTypes = NearbyLocationsConnectorTypesEnum::TYPE3;
+```
+
