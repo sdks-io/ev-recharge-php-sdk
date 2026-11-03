@@ -17,12 +17,11 @@
 
 ```php
 use ShellEVLib\Models\Builders\GetChargeSessionRetrieveResponse200JsonBuilder;
-use ShellEVLib\Models\GetChargeSessionRetrieveResponse200JsonStatusEnum;
 use ShellEVLib\Models\Builders\DataRetrieveBuilder;
 
 $getChargeSessionRetrieveResponse200Json = GetChargeSessionRetrieveResponse200JsonBuilder::init(
     '9d2dee33-7803-485a-a2b1-2c7538e597ee',
-    GetChargeSessionRetrieveResponse200JsonStatusEnum::SUCCESS
+    ''
 )
     ->data(
         [
